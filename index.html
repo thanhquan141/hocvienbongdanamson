@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Học Viện Bóng Đá Nam Sơn</title>
     
-    <link rel="icon" type="image/jpeg" href="ảnh logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -17,6 +16,7 @@
             --color-gold: #f1c40f;
             --color-white: #ffffff;
             --color-dark: #1a1a1a;
+            --color-deep-navy: #0f172a;
         }
 
         html {
@@ -33,7 +33,49 @@
         }
 
         section {
-            scroll-margin-top: 80px;
+            scroll-margin-top: 100px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1000px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .schedule-table th {
+            background-color: #f8fafc;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
         .checkbox-custom:checked + label {
@@ -68,6 +110,7 @@
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-link::after {
@@ -81,7 +124,7 @@
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after, .nav-link.active::after {
+        .nav-link:hover::after {
             width: 100%;
         }
 
@@ -105,6 +148,21 @@
             0% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(0, 132, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0); }
+        }
+
+        @keyframes phone-shake {
+            0% { transform: rotate(0); }
+            10% { transform: rotate(-10deg); }
+            20% { transform: rotate(10deg); }
+            30% { transform: rotate(-10deg); }
+            40% { transform: rotate(10deg); }
+            50% { transform: rotate(0); }
+            100% { transform: rotate(0); }
+        }
+
+        .hotline-icon-shake {
+            display: inline-block;
+            animation: phone-shake 1.5s infinite ease-in-out;
         }
 
         .timeline-container {
@@ -153,6 +211,18 @@
             z-index: 10;
             transform: translateX(-50%);
         }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .feature-card:hover {
+            border-color: var(--color-red);
+            background-color: white;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
         @media (max-width: 768px) {
             .timeline-line { left: 30px; }
             .timeline-icon { left: 30px; transform: none; }
@@ -160,8 +230,30 @@
             .timeline-item { justify-content: flex-start; }
         }
 
-        .location-card:hover .location-overlay {
-            opacity: 1;
+        .btn-schedule {
+            background-color: var(--color-deep-navy);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-schedule:hover {
+            background-color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .btn-schedule i {
+            color: var(--color-gold);
+            margin-right: 10px;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -174,22 +266,21 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white shadow-md border-b-4 border-red-600">
         <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <img src="ảnh logo.jpg" alt="NAM SƠN" class="h-14 w-auto rounded" onerror="this.src='https://placehold.co/60x60/ed1c24/ffffff?text=NS'">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('home')">
+                <img src="https://placehold.co/60x60/ed1c24/ffffff?text=NS" alt="NAM SƠN" class="h-14 w-auto rounded">
                 <div>
                     <span class="text-lg font-bold block leading-none text-red-600">HỌC VIỆN BÓNG ĐÁ</span>
                     <span class="text-xl font-black block leading-none text-gray-900">NAM SƠN</span>
                 </div>
             </div>
             <div class="hidden lg:flex space-x-6">
-                <a href="#home" class="nav-link font-bold hover:text-red-600">Trang Chủ</a>
-                <a href="#journey" class="nav-link font-bold hover:text-red-600">Hành Trình</a>
-                <a href="#pricing" class="nav-link font-bold hover:text-red-600">Học Phí</a>
-                <a href="#location" class="nav-link font-bold hover:text-red-600">Địa Điểm</a>
-                <a href="#enroll" class="nav-link font-bold hover:text-red-600">Đăng Ký</a>
+                <span onclick="scrollToSection('home')" class="nav-link font-bold hover:text-red-600">Trang Chủ</span>
+                <span onclick="scrollToSection('features')" class="nav-link font-bold hover:text-red-600">Tại sao chọn chúng tôi</span>
+                <span onclick="scrollToSection('journey')" class="nav-link font-bold hover:text-red-600">Hành Trình</span>
+                <span onclick="scrollToSection('pricing')" class="nav-link font-bold hover:text-red-600">Học Phí</span>
+                <span onclick="scrollToSection('location')" class="nav-link font-bold hover:text-red-600">Địa Điểm</span>
             </div>
             <div class="flex items-center space-x-2 border-l pl-4">
-                <img src="Logo_CLB_CATPHCM.png" alt="CATP" class="h-10 w-auto">
                  <div>
                     <span class="text-xs font-bold block leading-none text-red-600 uppercase">Đối tác chiến lược</span>
                     <span class="text-sm font-black block leading-none text-gray-900 uppercase">CLB CÔNG AN TP HCM</span>
@@ -206,12 +297,53 @@
                     <span class="text-yellow-400">HỌC VIỆN BÓNG ĐÁ NAM SƠN</span>
                 </h1>
                 <p class="text-lg mb-8 opacity-90 italic uppercase font-bold tracking-widest">Nền tảng vững chắc - Tương lai vươn xa</p>
-                <a href="#enroll" class="inline-block bg-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-xl">GIA NHẬP NGAY</a>
+                <button onclick="scrollToSection('enroll')" class="inline-block bg-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-xl">GIA NHẬP NGAY</button>
             </div>
         </div>
     </section>
 
-    <!-- Hành Trình Hợp Tác -->
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50 border-b">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black italic uppercase mb-2">Vì sao nên chọn <span class="text-red-600">Nam Sơn Academy</span></h2>
+                <div class="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="feature-card p-8 rounded-2xl bg-white text-center">
+                    <div class="w-20 h-20 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-building-columns"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 uppercase italic">Cơ sở vật chất</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Hệ thống sân bãi đạt chuẩn, an toàn, trang thiết bị tập luyện hiện đại hỗ trợ tối đa cho học viên.</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl bg-white text-center">
+                    <div class="w-20 h-20 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 uppercase italic">Đội ngũ HLV</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Các huấn luyện viên có bằng cấp chuyên môn cao, giàu kinh nghiệm và tâm huyết với bóng đá trẻ.</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl bg-white text-center">
+                    <div class="w-20 h-20 bg-yellow-50 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 uppercase italic">Giáo trình chuẩn</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Lộ trình đào tạo bài bản, kết hợp giữa kỹ năng bóng đá và phát triển thể chất toàn diện cho bé.</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl bg-white text-center">
+                    <div class="w-20 h-20 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-arrow-up-right-dots"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 uppercase italic">Cơ hội phát triển</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Cơ hội tiến thẳng vào các đội trẻ của CLB Công An TP.HCM dành cho những tài năng xuất sắc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
     <section id="journey" class="py-20 bg-white overflow-hidden border-b">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -255,18 +387,21 @@
         </div>
     </section>
 
-    <!-- Học Phí & Ưu Đãi -->
+    <!-- Pricing Section -->
     <section id="pricing" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-black italic uppercase mb-2">Bảng học phí <span class="text-red-600">Niêm yết</span></h2>
-            <div class="flex flex-col items-center gap-4 mb-12">
+            <div class="flex flex-col items-center gap-4 mb-8">
                 <div class="inline-block bg-red-100 text-red-700 px-6 py-2 rounded-full font-black italic uppercase text-xs shadow-sm border border-red-200">
                     ⚠️ Qui định: Học viên mới đăng ký lần đầu đóng tối thiểu 1 khóa (2 tháng)
                 </div>
-                <!-- Nút xem lịch học chi tiết -->
+                <button onclick="openModal()" class="btn-schedule">
+                    <i class="fas fa-calendar-days"></i> 
+                    Xem thông tin lịch học & thời gian chi tiết
+                </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mb-12">
                 <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500 relative overflow-hidden">
                     <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 5 CƠ BẢN</p>
                     <p class="text-2xl font-black mt-1">400.000đ</p>
@@ -308,15 +443,10 @@
                     </div>
                 </div>
             </div>
-             <!-- Nút mở Modal Lịch Học -->
-            <button onclick="openModal()" class="inline-flex items-center bg-gray-900 text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-black transition transform hover:scale-105 shadow-2xl uppercase italic group">
-                <i class="fas fa-calendar-alt mr-3 text-red-600 group-hover:animate-bounce"></i> 
-                Xem lịch học & thời gian chi tiết
-            </button>
-            <p class="text-gray-400 text-[9px] mt-4 font-bold uppercase italic tracking-widest opacity-60">* Nội dung áp dụng cho các cơ sở Bắc Hải & Lý Thường Kiệt</p>
         </div>
     </section>
-     <!-- Modal Lịch Học Chi Tiết (Thiết kế theo image_3eb58b) -->
+
+    <!-- Modal Lịch Học Chi Tiết -->
     <div id="scheduleModal" class="modal">
         <div class="modal-content animate-in zoom-in duration-300">
             <div class="bg-red-600 text-white p-6 flex justify-between items-center">
@@ -327,9 +457,9 @@
                 <table class="schedule-table">
                     <thead>
                         <tr>
-                            <th class="w-1/3">Bắc Hải<br><span class="text-[10px] font-normal lowercase">137 đường bắc hải</span></th>
-                            <th class="w-1/3">219 Lý Thường Kiệt<br><span class="text-[10px] font-normal lowercase">nhà tập luyện tdtt phú thọ</span></th>
-                            <th class="w-1/3">Sân 7 - 219 Lý Thường Kiệt<br><span class="text-[10px] font-normal lowercase">nhà tập luyện tdtt phú thọ</span></th>
+                            <th class="w-1/3">Bắc Hải<br><span class="text-[10px] font-normal lowercase">137 đường Bắc Bải</span></th>
+                            <th class="w-1/3">219 Lý Thường Kiệt<br><span class="text-[10px] font-normal lowercase">Nhà thi đấu Phú Thọ</span></th>
+                            <th class="w-1/3">Sân 7 - 219 Lý Thường Kiệt<br><span class="text-[10px] font-normal lowercase">Nhà thi đáu Phú Thọ</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -338,7 +468,7 @@
                                 <p class="text-red-600 mb-2 uppercase">Lớp Thứ 3 - Thứ 5</p>
                                 <p>(17:00 - 19:00)</p>
                                 <br>
-                                <p class="text-red-600 mb-2 uppercase">Lớp Thứ 7 - Chủ nhật</p>
+                                <p class="text-red-600 mb-2 uppercase">Lớp Thứ 7 - Chủ Nhật</p>
                                 <p>(17:00 - 19:00)</p>
                             </td>
                             <td class="text-left font-bold text-gray-800">
@@ -356,39 +486,10 @@
                             <td class="text-left font-bold text-gray-800">
                                 <p class="text-green-700 mb-2 uppercase">Lớp Thứ 7 - Chủ nhật</p>
                                 <p>(17:30 - 19:00)</p>
-                                <div class="mt-6 pt-4 border-t border-black">
-                                    <p class="text-xs font-black uppercase text-red-600 mb-2">Học phí sân 7:</p>
-                                    <p>850.000/Tháng/ 8 buổi</p>
-                                    <p class="mb-4">520.000/Tháng/ 4 buổi</p>
-                                    <p class="text-[10px] italic font-normal text-gray-500">Phụ thu ( bù trừ ) buổi học phát sinh:</p>
-                                    <ul class="text-[9px] font-normal list-disc ml-4 text-gray-500">
-                                        <li>Học 8 buổi: 105.000 VNĐ</li>
-                                        <li>Học 4 buổi: 130.000 VNĐ</li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="bg-gray-50">
-                            <td colspan="2" class="text-left p-6">
-                                <h4 class="font-black uppercase mb-4 underline decoration-red-600">QUY ĐỊNH VỀ HỌC PHÍ</h4>
-                                <ul class="space-y-2 text-xs font-bold text-gray-700">
-                                    <li>• Học phí tính từ ngày đầu tháng đến hết ngày cuối tháng.</li>
-                                    <li>• Học viên mới đăng ký lần đầu sẽ đóng 1 khóa (02 Tháng).</li>
-                                    <li>• Đóng học phí từ đầu tháng đến ngày 8 tây hàng tháng.</li>
-                                    <li>• Không giải quyết bồi hoàn học phí, bù ngày nghỉ vì lý do cá nhân.</li>
-                                </ul>
-                            </td>
-                            <td class="text-left p-6">
-                                <h4 class="font-black uppercase mb-4 underline decoration-red-600">HỌC PHÍ SÂN 5</h4>
-                                <p class="font-black text-red-600 text-lg">650.000 VNĐ <span class="text-[10px] text-gray-500 font-normal">/ 8 buổi</span></p>
-                                <p class="font-black text-red-600 text-lg">400.000 VNĐ <span class="text-[10px] text-gray-500 font-normal">/ 4 buổi</span></p>
-                                <div class="mt-4">
-                                    <p class="text-[10px] italic font-normal text-gray-500">Phụ thu ( bù trừ ) phát sinh:</p>
-                                    <ul class="text-[9px] list-disc ml-4 font-normal text-gray-500">
-                                        <li>Học 8 buổi: 80.000 VNĐ</li>
-                                        <li>Học 4 buổi: 100.000 VNĐ</li>
-                                    </ul>
-                                </div>
+                                
+                            
+                                    
+                                
                             </td>
                         </tr>
                     </tbody>
@@ -400,7 +501,7 @@
         </div>
     </div>
 
-    <!-- Địa điểm & Liên hệ -->
+    <!-- Location Section -->
     <section id="location" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
@@ -409,7 +510,6 @@
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <!-- Cơ sở 1 -->
                 <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
                     <div class="flex items-center mb-6">
                         <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
@@ -420,15 +520,8 @@
                             <p class="text-xs font-bold text-red-600 uppercase">Quận 10 - TP.HCM</p>
                         </div>
                     </div>
-                    <div class="space-y-4 flex-grow mb-8">
-                        <div>
-                            <p class="text-gray-900 font-bold text-lg leading-snug">137 Bắc Hải, P. Hòa Hưng, Quận 10, TP.HCM</p>
-                            <p class="text-gray-500 text-xs italic font-bold uppercase mt-1">(Sân bóng đá B7C13)</p>
-                        </div>
-                        <div class="pt-4 border-t border-gray-200">
-                            <p class="text-xs text-gray-500 uppercase font-black italic"><i class="fas fa-info-circle mr-2"></i>Thông tin:</p>
-                            <p class="text-sm text-gray-600 mt-1">Văn phòng ghi danh chính. Có các lớp học vào lúc T7 CN sân 5.</p>
-                        </div>
+                    <div class="space-y-4 flex-grow mb-8 text-gray-900 font-bold text-lg leading-snug">
+                        137 Bắc Hải, P. Hòa Hưng, Quận 10, TP.HCM
                     </div>
                     <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
                         <iframe 
@@ -437,7 +530,6 @@
                     </div>
                 </div>
 
-                <!-- Cơ sở 2 -->
                 <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
                     <div class="flex items-center mb-6">
                         <div class="w-14 h-14 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
@@ -448,15 +540,8 @@
                             <p class="text-xs font-bold text-blue-900 uppercase">Quận 11 - TP.HCM</p>
                         </div>
                     </div>
-                    <div class="space-y-4 flex-grow mb-8">
-                        <div>
-                            <p class="text-gray-900 font-bold text-lg leading-snug">219 Lý Thường Kiệt, P. Diên Hồng, TP.HCM</p>
-                            <p class="text-gray-500 text-xs italic font-bold uppercase mt-1">(Sân bóng đá LYON)</p>
-                        </div>
-                        <div class="pt-4 border-t border-gray-200">
-                            <p class="text-xs text-gray-500 uppercase font-black italic"><i class="fas fa-info-circle mr-2"></i>Thông tin:</p>
-                            <p class="text-sm text-gray-600 mt-1">Cơ sở tập luyện mở rộng. Có các lớp học từ T2 - CN sân 5 và sân 7. Phù hợp cho học viên khu vực Q11, Q5, Tân Bình.</p>
-                        </div>
+                    <div class="space-y-4 flex-grow mb-8 text-gray-900 font-bold text-lg leading-snug">
+                        219 Lý Thường Kiệt, Quận 11, TP.HCM
                     </div>
                     <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
                         <iframe 
@@ -465,35 +550,61 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Hotline chung -->
-            <div class="mt-12 max-w-2xl mx-auto bg-gray-900 text-white p-6 rounded-3xl flex flex-col md:row items-center justify-between shadow-2xl">
-                <div class="text-center md:text-left mb-4 md:mb-0">
-                    <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Hotline tư vấn chung</p>
-                    <p class="text-2xl font-black text-red-500 uppercase">0869 426 975</p>
-                </div>
-                <a href="tel:0869426975" class="bg-red-600 hover:bg-red-700 text-white font-black px-8 py-3 rounded-xl transition uppercase text-sm italic">
-                    Gọi ngay <i class="fas fa-phone-alt ml-2"></i>
-                </a>
-            </div>
         </div>
     </section>
 
-    <!-- Form Đăng Ký -->
-    <section id="enroll" class="py-20 bg-gray-100">
+    <!-- Hotline Section Above Registration -->
+    <div class="bg-gray-100 pt-16">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <div class="bg-white rounded-t-[3rem] p-8 md:p-12 border-x border-t border-gray-200">
+                <div class="mb-6">
+                    <p class="text-xs font-black uppercase text-red-600 italic tracking-widest mb-2">Liên hệ nhanh để được tư vấn lộ trình phù hợp</p>
+                    <h3 class="text-2xl font-black uppercase italic text-gray-900">Hotline <span class="text-red-600">Tuyển Sinh</span></h3>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <a href="tel:0869426975" class="group flex items-center justify-center bg-red-600 text-white px-8 py-5 rounded-2xl shadow-xl hover:bg-red-700 transition transform hover:scale-105 active:scale-95 border-b-4 border-red-800">
+                        <div class="mr-4 hotline-icon-shake bg-white/20 p-3 rounded-xl">
+                            <i class="fas fa-phone-alt text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-[10px] font-black uppercase opacity-90 leading-none mb-1">Gọi ngay cho chúng tôi</span>
+                            <span class="block text-3xl font-black tracking-tighter leading-none">0869.426.975</span>
+                        </div>
+                    </a>
+                    <p class="mt-6 text-gray-400 text-xs italic font-bold uppercase tracking-tight">Hoặc điền vào biểu mẫu ghi danh bên dưới</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrollment Form -->
+    <section id="enroll" class="pb-20 bg-gray-100">
         <div class="container mx-auto px-6 max-w-4xl">
-            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-gray-100">
+            <div class="bg-white p-8 md:p-12 rounded-b-[3rem] shadow-2xl border-x border-b border-gray-200">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-black uppercase italic">Đăng ký <span class="text-red-600">Ghi danh</span></h2>
-                    <p class="text-gray-400 text-[10px] mt-2 font-bold uppercase tracking-widest italic">* Hệ thống sẽ tính học phí theo chu kỳ khóa 2 tháng cho học viên mới</p>
+                    <div class="w-16 h-1 bg-red-600 mx-auto mt-2 rounded-full"></div>
                 </div>
                 
                 <form id="footballForm" class="space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
-                        <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
-                        <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
-                        <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Phụ huynh</label>
+                            <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Liên hệ</label>
+                            <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Tên học viên</label>
+                            <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Năm sinh</label>
+                            <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                        </div>
                     </div>
 
                     <div class="space-y-4">
@@ -501,7 +612,7 @@
                             <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
                             Chọn cơ sở tập luyện:
                         </p>
-                        <select id="locationSelect" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm font-bold text-sm bg-white cursor-pointer">
+                        <select id="locationSelect" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm font-bold text-sm bg-gray-50 cursor-pointer">
                             <option value="B7C13">Cơ sở 1: Sân B7C13 (Bắc Hải, Quận 10)</option>
                             <option value="LYON">Cơ sở 2: Sân LYON (Lý Thường Kiệt, Quận 11)</option>
                         </select>
@@ -545,14 +656,13 @@
                         <div id="notice-box" class="bg-blue-50 p-3 rounded-lg border border-blue-100 hidden text-[10px] text-blue-600 font-bold uppercase italic"></div>
                     </div>
 
-                    <div class="bg-gray-900 p-8 rounded-3xl text-white flex flex-col md:row justify-between items-center gap-6 relative overflow-hidden">
+                    <div class="bg-gray-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden border-4 border-red-600/20">
                         <div class="z-10 text-center md:text-left">
                             <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-widest mb-1">Dự toán học phí khóa đầu (2 tháng)</p>
                             <p id="calc-label" class="text-sm text-gray-400 italic">Vui lòng chọn đầy đủ thông tin bên trên...</p>
                         </div>
                         <div class="z-10 text-center md:text-right">
-                             <div class="text-4xl font-black text-red-500" id="totalTuition">0đ</div>
-                             <p class="text-[9px] text-gray-500 uppercase mt-1">Học viên mới đóng tối thiểu 2 tháng</p>
+                             <div class="text-4xl font-black text-white" id="totalTuition">0đ</div>
                         </div>
                     </div>
 
@@ -566,11 +676,10 @@
         <div class="container mx-auto px-6 text-center">
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
                 <div class="flex items-center space-x-3">
-                    <img src="ảnh logo.jpg" alt="NAM SƠN" class="h-10 w-auto rounded border border-gray-800">
+                    <img src="https://placehold.co/60x60/ed1c24/ffffff?text=NS" alt="NAM SƠN" class="h-10 w-auto rounded border border-gray-800">
                     <span class="text-sm font-black italic uppercase tracking-widest">HỌC VIỆN BÓNG ĐÁ NAM SƠN </span>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <img src="Logo_CLB_CATPHCM.png" alt="CATP" class="h-10 w-auto">
                     <span class="text-sm font-black italic uppercase tracking-widest text-gray-500">CLB CÔNG AN TP HCM</span>
                 </div>
             </div>
@@ -579,11 +688,33 @@
     </footer>
 
     <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offset = 80;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = section.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
         const pitchRadios = document.querySelectorAll('.pitch-radio');
         const checkboxes = document.querySelectorAll('.schedule-check');
         const totalDisplay = document.getElementById('totalTuition');
         const calcLabel = document.getElementById('calc-label');
         const noticeBox = document.getElementById('notice-box');
+        const modal = document.getElementById('scheduleModal');
+
+        function openModal() { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+        function closeModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        window.onclick = function(event) { if (event.target == modal) closeModal(); }
 
         const days = {
             t2: document.getElementById('t2'),
@@ -640,7 +771,6 @@
             }
 
             const courseTotal = monthlyTotal * 2;
-            
             totalDisplay.innerText = courseTotal.toLocaleString('vi-VN') + "đ";
             if (monthlyTotal > 0) {
                 calcLabel.innerHTML = `${label} <br> <span class='text-xs text-yellow-500 font-bold'>(${monthlyTotal.toLocaleString('vi-VN')}đ/tháng x 2 tháng)</span>`;
@@ -660,18 +790,15 @@
 
         document.getElementById('footballForm').onsubmit = (e) => {
             e.preventDefault();
-            alert("Đăng ký thành công! Nam Sơn Academy sẽ sớm liên hệ qua Zalo/Số điện thoại để hướng dẫn bé đi tập tại cơ sở đã chọn.");
+            const message = "Đăng ký thành công! Cảm ơn bạn đã quan tâm đến Học viện Bóng đá Nam Sơn. Chúng tôi sẽ liên hệ lại qua số điện thoại/Zalo sớm nhất.";
+            const msgBox = document.createElement('div');
+            msgBox.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-green-600 text-white px-8 py-4 rounded-xl shadow-2xl z-[2000] font-bold text-center";
+            msgBox.innerText = message;
+            document.body.appendChild(msgBox);
+            setTimeout(() => msgBox.remove(), 5000);
+            e.target.reset();
+            updateLogic();
         };
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                }
-            });
-        });
     </script>
 </body>
 </html>
