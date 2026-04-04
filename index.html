@@ -587,9 +587,9 @@
     </div>
 
     <!-- Enrollment Form -->
-    <section id="enroll" class="pb-20 bg-gray-100">
+    <section id="enroll" class="py-20 bg-gray-100">
         <div class="container mx-auto px-6 max-w-4xl">
-            <div class="bg-white p-8 md:p-12 rounded-b-[3rem] shadow-2xl border-x border-b border-gray-200">
+            <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-gray-200">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-black uppercase italic">Đăng ký <span class="text-red-600">Ghi danh</span></h2>
                     <div class="w-16 h-1 bg-red-600 mx-auto mt-2 rounded-full"></div>
@@ -599,19 +599,19 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Phụ huynh</label>
-                            <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                            <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50" required>
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Liên hệ</label>
-                            <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                            <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50" required>
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Tên học viên</label>
-                            <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                            <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50" required>
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Năm sinh</label>
-                            <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50 focus:bg-white" required>
+                            <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm bg-gray-50" required>
                         </div>
                     </div>
 
@@ -620,28 +620,28 @@
                             <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
                             Chọn cơ sở tập luyện:
                         </p>
-                        <select id="locationSelect" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm font-bold text-sm bg-gray-50 cursor-pointer">
-                            <option value="B7C13">Cơ sở 1: Sân B7C13 (Bắc Hải, Quận 10)</option>
-                            <option value="LYON">Cơ sở 2: Sân LYON (Lý Thường Kiệt, Quận 11)</option>
+                        <select id="locationSelect" onchange="updateLogic()" class="w-full px-5 py-4 rounded-xl border-2 border-gray-100 outline-none focus:border-red-600 transition shadow-sm font-bold text-sm bg-gray-50 cursor-pointer">
+                            <option value="cs1">Cơ sở 1: 137 đường Bắc Hải, Quận 10</option>
+                            <option value="cs2" selected>Cơ sở 2: Phú Thọ (Lý Thường Kiệt), Quận 11</option>
                         </select>
                     </div>
 
                     <div class="space-y-4">
                         <p class="text-xs font-black uppercase text-gray-500 italic flex items-center">
                             <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">2</span>
-                            Chọn mô hình sân tập:
+                            Chọn loại sân tập:
                         </p>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <input type="radio" id="pitch5" name="pitchType" value="5" class="hidden radio-custom pitch-radio" checked>
-                                <label for="pitch5" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition hover:bg-white uppercase text-xs">
-                                    <i class="fas fa-th mr-2"></i> Lớp Sân 5
+                                <label for="pitch5" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition uppercase text-xs">
+                                    <i class="fas fa-futbol mr-2"></i> Lớp Sân 5
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" id="pitch7" name="pitchType" value="7" class="hidden radio-custom pitch-radio">
-                                <label for="pitch7" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition hover:bg-white uppercase text-xs">
-                                    <i class="fas fa-border-all mr-2"></i> Lớp Sân 7
+                                <label for="pitch7" id="labelPitch7" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition uppercase text-xs">
+                                    <i class="fas fa-users mr-2"></i> Lớp Sân 7
                                 </label>
                             </div>
                         </div>
@@ -653,77 +653,50 @@
                             Chọn các buổi tập mong muốn:
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <input type="checkbox" id="t2" value="Thứ 2" class="hidden checkbox-custom schedule-check"><label for="t2" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T2</label>
-                            <input type="checkbox" id="t3" value="Thứ 3" class="hidden checkbox-custom schedule-check"><label for="t3" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T3</label>
-                            <input type="checkbox" id="t4" value="Thứ 4" class="hidden checkbox-custom schedule-check"><label for="t4" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T4</label>
-                            <input type="checkbox" id="t5" value="Thứ 5" class="hidden checkbox-custom schedule-check"><label for="t5" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T5</label>
-                            <input type="checkbox" id="t6" value="Thứ 6" class="hidden checkbox-custom schedule-check"><label for="t6" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T6</label>
-                            <input type="checkbox" id="t7" value="Thứ 7" class="hidden checkbox-custom schedule-check"><label for="t7" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T7</label>
-                            <input type="checkbox" id="cn" value="Chủ Nhật" class="hidden checkbox-custom schedule-check"><label for="cn" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">CN</label>
+                            <input type="checkbox" id="t2" value="T2" class="hidden checkbox-custom schedule-check"><label for="t2" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T2</label>
+                            <input type="checkbox" id="t3" value="T3" class="hidden checkbox-custom schedule-check"><label for="t3" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T3</label>
+                            <input type="checkbox" id="t4" value="T4" class="hidden checkbox-custom schedule-check"><label for="t4" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T4</label>
+                            <input type="checkbox" id="t5" value="T5" class="hidden checkbox-custom schedule-check"><label for="t5" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T5</label>
+                            <input type="checkbox" id="t6" value="T6" class="hidden checkbox-custom schedule-check"><label for="t6" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T6</label>
+                            <input type="checkbox" id="t7" value="T7" class="hidden checkbox-custom schedule-check"><label for="t7" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">T7</label>
+                            <input type="checkbox" id="cn" value="CN" class="hidden checkbox-custom schedule-check"><label for="cn" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs transition shadow-sm">CN</label>
                         </div>
                         <div id="notice-box" class="bg-blue-50 p-3 rounded-lg border border-blue-100 hidden text-[10px] text-blue-600 font-bold uppercase italic"></div>
                     </div>
 
-                    <div class="bg-gray-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden border-4 border-red-600/20">
-                        <div class="z-10 text-center md:text-left">
+                    <div class="bg-gray-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-6 border-4 border-red-600/20">
+                        <div class="text-center md:text-left">
                             <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-widest mb-1">Dự toán học phí khóa đầu (2 tháng)</p>
-                            <p id="calc-label" class="text-sm text-gray-400 italic">Vui lòng chọn đầy đủ thông tin bên trên...</p>
+                            <p id="calc-label" class="text-sm text-gray-400 italic">Vui lòng chọn thông tin để xem dự toán...</p>
                         </div>
-                        <div class="z-10 text-center md:text-right">
-                             <div class="text-4xl font-black text-white" id="totalTuition">0đ</div>
-                        </div>
+                        <div class="text-4xl font-black text-white" id="totalTuition">0đ</div>
                     </div>
 
-                    <button type="submit" class="w-full bg-red-600 text-white font-black py-5 rounded-2xl text-lg uppercase shadow-xl hover:bg-red-700 transition transform hover:-translate-y-1">Gửi Đăng Ký Tư Vấn</button>
+                    <button type="submit" class="w-full bg-red-600 text-white font-black py-5 rounded-2xl text-lg uppercase shadow-xl hover:bg-red-700 transition">Gửi Đăng Ký Tư Vấn</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-950 text-white py-16 border-t-4 border-red-600">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
-                <div class="flex items-center space-x-3">
-                    <img src="https://placehold.co/60x60/ed1c24/ffffff?text=NS" alt="NAM SƠN" class="h-10 w-auto rounded border border-gray-800">
-                    <span class="text-sm font-black italic uppercase tracking-widest">HỌC VIỆN BÓNG ĐÁ NAM SƠN </span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <span class="text-sm font-black italic uppercase tracking-widest text-gray-500">CLB CÔNG AN TP HCM</span>
-                </div>
-            </div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">© 2026 HỌC VIỆN BÓNG ĐÁ NAM SƠN. All Rights Reserved.</p>
-        </div>
-    </footer>
-
     <script>
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
-            if (section) {
-                const offset = 80;
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = section.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
+            if (section) window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
         }
 
-        const pitchRadios = document.querySelectorAll('.pitch-radio');
-        const checkboxes = document.querySelectorAll('.schedule-check');
-        const totalDisplay = document.getElementById('totalTuition');
-        const calcLabel = document.getElementById('calc-label');
-        const noticeBox = document.getElementById('notice-box');
         const modal = document.getElementById('scheduleModal');
-
         function openModal() { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function closeModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-
         window.onclick = function(event) { if (event.target == modal) closeModal(); }
 
+        const locSelect = document.getElementById('locationSelect');
+        const pitch5 = document.getElementById('pitch5');
+        const pitch7 = document.getElementById('pitch7');
+        const labelPitch7 = document.getElementById('labelPitch7');
+        const noticeBox = document.getElementById('notice-box');
+        const totalDisplay = document.getElementById('totalTuition');
+        const calcLabel = document.getElementById('calc-label');
+        
         const days = {
             t2: document.getElementById('t2'),
             t3: document.getElementById('t3'),
@@ -735,31 +708,58 @@
         };
 
         function updateLogic() {
-            let pitchType = "5";
-            pitchRadios.forEach(radio => { if(radio.checked) pitchType = radio.value; });
+            const loc = locSelect.value;
+            let pitchType = document.querySelector('input[name="pitchType"]:checked').value;
 
-            Object.values(days).forEach(cb => cb.disabled = false);
+            // Reset tất cả các buổi
+            Object.values(days).forEach(cb => {
+                cb.disabled = false;
+                // Nếu đang bị disable thì tự động bỏ chọn
+            });
+            pitch7.disabled = false;
             noticeBox.classList.add('hidden');
 
-            if (pitchType === "7") {
-                [days.t2, days.t3, days.t4, days.t5, days.t6].forEach(cb => {
+            // Ràng buộc cho Cơ sở 1 (Bắc Hải)
+            if (loc === 'cs1') {
+                // 1. Không có sân 7
+                pitch7.disabled = true;
+                if (pitch7.checked) pitch5.checked = true;
+                pitchType = "5"; 
+
+                // 2. Chỉ có T3, T5, T7, CN
+                [days.t2, days.t4, days.t6].forEach(cb => {
                     cb.checked = false;
                     cb.disabled = true;
                 });
+                
                 noticeBox.classList.remove('hidden');
-                noticeBox.innerText = "* Sân 7 hiện chỉ mở lớp vào Thứ 7 & Chủ Nhật.";
-            } else if (pitchType === "5") {
-                days.t6.checked = false;
-                days.t6.disabled = true;
-                noticeBox.classList.remove('hidden');
-                noticeBox.innerText = "* Sân 5 không tổ chức các lớp vào Thứ 6.";
+                noticeBox.innerText = "* Cơ sở Bắc Hải chỉ có lớp Sân 5 vào Thứ 3, 5, 7 và Chủ Nhật.";
+            } 
+            // Ràng buộc cho Cơ sở 2 (Phú Thọ)
+            else {
+                // Sân 5 Phú Thọ không có T6
+                if (pitchType === "5") {
+                    days.t6.checked = false;
+                    days.t6.disabled = true;
+                }
+                // Sân 7 Phú Thọ chỉ có T7, CN
+                if (pitchType === "7") {
+                    [days.t2, days.t3, days.t4, days.t5, days.t6].forEach(cb => {
+                        cb.checked = false;
+                        cb.disabled = true;
+                    });
+                    noticeBox.classList.remove('hidden');
+                    noticeBox.innerText = "* Lớp Sân 7 tại Phú Thọ hiện chỉ mở vào Thứ 7 & Chủ Nhật.";
+                }
             }
-            calculateTuition(pitchType);
+
+            calculateTuition();
         }
 
-        function calculateTuition(pitchType) {
+        function calculateTuition() {
+            let pitchType = document.querySelector('input[name="pitchType"]:checked').value;
             let count = 0;
-            checkboxes.forEach(cb => { if(cb.checked) count++; });
+            document.querySelectorAll('.schedule-check:checked').forEach(() => count++);
             
             let monthlyTotal = 0;
             let label = "";
@@ -769,7 +769,7 @@
                 label = "Vui lòng chọn ít nhất 1 buổi tập...";
             } else if (count >= 3) {
                 monthlyTotal = 1500000;
-                label = "Năng Khiếu (3+ buổi/tuần)";
+                label = "Lớp Năng Khiếu (3+ buổi/tuần)";
             } else if (pitchType === "5") {
                 if (count === 1) { monthlyTotal = 400000; label = "Sân 5 Cơ Bản (1 buổi/tuần)"; }
                 else if (count === 2) { monthlyTotal = 650000; label = "Sân 5 Nâng Cao (2 buổi/tuần)"; }
@@ -780,30 +780,22 @@
 
             const courseTotal = monthlyTotal * 2;
             totalDisplay.innerText = courseTotal.toLocaleString('vi-VN') + "đ";
-            if (monthlyTotal > 0) {
-                calcLabel.innerHTML = `${label} <br> <span class='text-xs text-yellow-500 font-bold'>(${monthlyTotal.toLocaleString('vi-VN')}đ/tháng x 2 tháng)</span>`;
-            } else {
-                calcLabel.innerText = label;
-            }
+            calcLabel.innerHTML = monthlyTotal > 0 
+                ? `${label} <br><span class='text-xs text-yellow-500 font-bold'>(${monthlyTotal.toLocaleString('vi-VN')}đ/tháng x 2 tháng)</span>`
+                : label;
         }
 
-        pitchRadios.forEach(radio => radio.addEventListener('change', updateLogic));
-        checkboxes.forEach(cb => cb.addEventListener('change', () => {
-            let pitchType = "5";
-            pitchRadios.forEach(radio => { if(radio.checked) pitchType = radio.value; });
-            calculateTuition(pitchType);
-        }));
+        // Gắn sự kiện
+        document.querySelectorAll('.pitch-radio, .schedule-check').forEach(el => {
+            el.addEventListener('change', updateLogic);
+        });
 
+        // Khởi tạo ban đầu
         updateLogic();
 
         document.getElementById('footballForm').onsubmit = (e) => {
             e.preventDefault();
-            const message = "Đăng ký thành công! Cảm ơn bạn đã quan tâm đến Học viện Bóng đá Nam Sơn. Chúng tôi sẽ liên hệ lại qua số điện thoại/Zalo sớm nhất.";
-            const msgBox = document.createElement('div');
-            msgBox.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-green-600 text-white px-8 py-4 rounded-xl shadow-2xl z-[2000] font-bold text-center";
-            msgBox.innerText = message;
-            document.body.appendChild(msgBox);
-            setTimeout(() => msgBox.remove(), 5000);
+            alert("Đăng ký thành công! Chúng tôi sẽ liên hệ tư vấn sớm nhất.");
             e.target.reset();
             updateLogic();
         };
