@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Viện Bóng Đá Nam Sơn</title>
+    <title>Học Viện Bóng Đá Nam Sơn - Khóa Hè Rực Lửa 2026</title>
     
+    <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts Oswald & Roboto -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
 
         :root {
             --color-red: #ed1c24;
             --color-navy: #002d72;
             --color-gold: #f1c40f;
             --color-white: #ffffff;
-            --color-dark: #1a1a1a;
-            --color-deep-navy: #0f172a;
+            --color-dark: #0f172a;
+            --color-light-bg: #f8fafc;
         }
 
         html {
@@ -25,88 +28,61 @@
 
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: var(--color-light-bg);
+            color: #1e293b;
         }
 
-        h1, h2, h3, h4, .nav-link {
+        h1, h2, h3, h4, h5, h6, .nav-link, .font-oswald {
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
         }
 
         section {
-            scroll-margin-top: 100px;
+            scroll-margin-top: 90px;
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 1000px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .schedule-table th, .schedule-table td {
-            border: 1px solid #e2e8f0;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .schedule-table th {
-            background-color: #f8fafc;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
+        /* Custom Checkbox/Radio styling matching brand identity */
         .checkbox-custom:checked + label {
             background-color: var(--color-red);
             color: white;
             border-color: var(--color-red);
             transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.25);
         }
 
         .checkbox-custom:disabled + label {
-            background-color: #f3f4f6;
-            color: #d1d5db;
-            border-color: #e5e7eb;
+            background-color: #e2e8f0;
+            color: #94a3b8;
+            border-color: #cbd5e1;
+            cursor: not-allowed;
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .radio-custom:checked + label {
+            background-color: var(--color-navy);
+            color: white;
+            border-color: var(--color-navy);
+            box-shadow: 0 4px 12px rgba(0, 45, 114, 0.3);
+            transform: scale(1.03);
+        }
+
+        .radio-custom:disabled + label {
+            background-color: #e2e8f0;
+            color: #94a3b8;
             cursor: not-allowed;
             opacity: 0.5;
         }
 
-        .radio-custom:checked + label {
-            background-color: var(--color-red);
-            color: white;
-            border-color: var(--color-red);
-            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.3);
-        }
-
+        /* Hero banner background fallback */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            height: 60vh;
         }
 
+        /* Nav links interactive hover effect */
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
@@ -119,7 +95,7 @@
             bottom: -4px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background-color: var(--color-red);
             transition: width 0.3s ease;
         }
@@ -128,6 +104,7 @@
             width: 100%;
         }
 
+        /* Zalo floating contact button */
         .zalo-bubble {
             position: fixed;
             bottom: 30px;
@@ -140,254 +117,441 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0, 132, 255, 0.4);
             animation: pulse-zalo 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .zalo-bubble:hover {
+            transform: scale(1.1);
         }
         
         @keyframes pulse-zalo {
             0% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 132, 255, 0); }
+            70% { box-shadow: 0 0 0 18px rgba(0, 132, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0); }
         }
 
+        /* Hotline phone wiggle */
         @keyframes phone-shake {
             0% { transform: rotate(0); }
-            10% { transform: rotate(-10deg); }
-            20% { transform: rotate(10deg); }
-            30% { transform: rotate(-10deg); }
-            40% { transform: rotate(10deg); }
+            10% { transform: rotate(-12deg); }
+            20% { transform: rotate(12deg); }
+            30% { transform: rotate(-12deg); }
+            40% { transform: rotate(12deg); }
             50% { transform: rotate(0); }
             100% { transform: rotate(0); }
         }
 
         .hotline-icon-shake {
             display: inline-block;
-            animation: phone-shake 1.5s infinite ease-in-out;
+            animation: phone-shake 1.8s infinite ease-in-out;
         }
 
-        .timeline-container {
-            position: relative;
-            padding: 2rem 0;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--color-navy), var(--color-red));
-            transform: translateX(-50%);
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
         }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
         }
-        .timeline-content {
-            width: 45%;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-        .timeline-content:hover {
-            transform: translateY(-5px);
-        }
-        .timeline-icon {
-            position: absolute;
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 4px solid var(--color-navy);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transform: translateX(-50%);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
-        .feature-card {
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-        .feature-card:hover {
-            border-color: var(--color-red);
-            background-color: white;
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        @media (max-width: 768px) {
-            .timeline-line { left: 30px; }
-            .timeline-icon { left: 30px; transform: none; }
-            .timeline-content { width: calc(100% - 80px); margin-left: 80px; }
-            .timeline-item { justify-content: flex-start; }
-            .nav-desktop { display: none; }
-        }
-
-        .btn-schedule {
-            background-color: var(--color-deep-navy);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .btn-schedule:hover {
-            background-color: #000000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-        .btn-schedule i {
-            color: var(--color-gold);
-            margin-right: 10px;
-            font-size: 18px;
+        /* Print Media styling */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+            .print-invoice {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="antialiased selection:bg-red-500 selection:text-white">
 
-    <a href="https://zalo.me/0869426975" target="_blank" class="zalo-bubble">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-8 h-8">
+    <!-- Floating Zalo Button -->
+    <a href="https://zalo.me/0869426975" target="_blank" class="zalo-bubble no-print" title="Chat qua Zalo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-9 h-9">
     </a>
 
+    <!-- SYSTEM ALERTS CONTAINER (Replaces dangerous standard alert boxes) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[2000] flex flex-col gap-3 pointer-events-none"></div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white shadow-md border-b-4 border-red-600">
-        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-            <!-- Left: Nam Son Academy Logo (Square) -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('home')">
-                <img src="image_3ebd48.png" alt="Logo Nam Sơn Academy" class="h-14 w-14 rounded-lg object-contain bg-gray-50 p-1 border">
-                <div class="hidden sm:block">
-                    <span class="text-xs font-bold block leading-none text-red-600">HỌC VIỆN BÓNG ĐÁ</span>
-                    <span class="text-lg font-black block leading-none text-gray-900">NAM SƠN</span>
+    <nav class="fixed w-full top-0 left-0 z-50 bg-white/95 backdrop-blur shadow-md border-b-4 border-red-600 no-print">
+        <div class="container mx-auto px-4 py-2.5 flex justify-between items-center">
+            <!-- Left Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="scrollToSection('home')">
+                <div class="relative w-14 h-14 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center p-0.5">
+                    <img id="main-logo" src="image_3ebd48.png" alt="Logo Nam Sơn Academy" 
+                         class="h-full w-full object-contain" 
+                         onerror="loadFallbackLogo(this, 'NS', '#002d72')">
+                </div>
+                <div>
+                    <span class="text-[10px] font-black block leading-none text-red-600 tracking-wider">HỌC VIỆN BÓNG ĐÁ</span>
+                    <span class="text-xl font-extrabold block leading-none text-slate-900 tracking-tight">NAM SƠN</span>
                 </div>
             </div>
 
-            <!-- Center: Navigation Links -->
-            <div class="hidden lg:flex space-x-6 nav-desktop">
-                <span onclick="scrollToSection('home')" class="nav-link font-bold hover:text-red-600 text-sm">Trang Chủ</span>
-                <span onclick="scrollToSection('features')" class="nav-link font-bold hover:text-red-600 text-sm">Ưu Điểm</span>
-                <span onclick="scrollToSection('journey')" class="nav-link font-bold hover:text-red-600 text-sm">Hành Trình</span>
-                <span onclick="scrollToSection('pricing')" class="nav-link font-bold hover:text-red-600 text-sm">Học Phí</span>
-                <span onclick="scrollToSection('location')" class="nav-link font-bold hover:text-red-600 text-sm">Địa Điểm</span>
+            <!-- Middle Navigation Links (Desktop) -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <span onclick="scrollToSection('home')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Trang Chủ</span>
+                <span onclick="scrollToSection('features')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Ưu Điểm</span>
+                <span onclick="scrollToSection('journey')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Hợp Tác</span>
+                <span onclick="scrollToSection('schedule-section')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Lịch Học</span>
+                <span onclick="scrollToSection('pricing')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Học Phí</span>
+                <span onclick="scrollToSection('location')" class="nav-link font-bold text-slate-800 hover:text-red-600 text-sm tracking-wide">Cơ Sở</span>
             </div>
 
-            <!-- Right: Partner Logo (Square) -->
-            <div class="flex items-center space-x-3 border-l pl-4">
-                 <div class="hidden sm:block text-right">
-                    <span class="text-[9px] font-bold block leading-none text-red-600 uppercase">Đối tác chiến lược</span>
-                    <span class="text-[11px] font-black block leading-none text-gray-900 uppercase">CLB CÔNG AN TP.HCM</span>
+            <!-- Right Strategic Partner Info -->
+            <div class="flex items-center space-x-3 border-l-2 border-slate-200 pl-4">
+                <div class="hidden sm:block text-right">
+                    <span class="text-[9px] font-black block leading-none text-red-600 tracking-widest uppercase">Đại diện tuyển sinh</span>
+                    <span class="text-[11px] font-black block leading-none text-slate-950 tracking-tight mt-0.5 uppercase">CLB CÔNG AN TP.HCM</span>
                 </div>
-                <img src="image_3eb58b.png" alt="Logo CLB Công An TP HCM" class="h-14 w-14 rounded-lg object-contain bg-gray-50 p-1 border">
+                <div class="relative w-14 h-14 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center p-0.5">
+                    <img id="partner-logo" src="image_3eb58b.png" alt="Logo CLB Công An TP HCM" 
+                         class="h-full w-full object-contain" 
+                         onerror="loadFallbackLogo(this, 'CA', '#ed1c24')">
+                </div>
+                
+                <!-- Hamburger Menu Trigger (Mobile) -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-700 hover:text-red-600 focus:outline-none" aria-label="Menu">
+                    <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu Panel -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-900 text-white border-t border-slate-800 transition-all duration-300">
+            <div class="flex flex-col space-y-4 px-6 py-6 font-oswald text-lg">
+                <span onclick="scrollToSection('home'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-house mr-3 text-red-500"></i>Trang Chủ</span>
+                <span onclick="scrollToSection('features'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-star mr-3 text-red-500"></i>Ưu Điểm</span>
+                <span onclick="scrollToSection('journey'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-handshake mr-3 text-red-500"></i>Hợp Tác Chiến Lược</span>
+                <span onclick="scrollToSection('schedule-section'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-calendar mr-3 text-red-500"></i>Lịch Học Chi Tiết</span>
+                <span onclick="scrollToSection('pricing'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-tags mr-3 text-red-500"></i>Bảng Học Phí</span>
+                <span onclick="scrollToSection('location'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-map-location mr-3 text-red-500"></i>Địa Điểm Cơ Sở</span>
+                <span onclick="scrollToSection('enroll'); toggleMobileMenu()" class="hover:text-red-500 transition cursor-pointer"><i class="fa-solid fa-file-signature mr-3 text-red-500"></i>Đăng Ký Khóa Học</span>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section id="home" class="hero-section flex items-center justify-center text-center text-white">
-        <div class="max-w-4xl px-4 mt-20">
-            <div class="bg-black/40 backdrop-blur-sm p-8 rounded-3xl inline-block">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase italic">
-                    <span class="text-yellow-400">HỌC VIỆN BÓNG ĐÁ NAM SƠN</span>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center text-center text-white relative min-h-[650px] pt-24 overflow-hidden">
+        <!-- Floating Visual Accents -->
+        <div class="absolute inset-0 bg-gradient-to-b from-navy-950/10 via-transparent to-slate-900 pointer-events-none"></div>
+        <div class="absolute -top-12 -left-12 w-64 h-64 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto max-w-4xl px-4 z-10">
+            <div class="bg-black/55 backdrop-blur-md p-8 sm:p-12 rounded-[2.5rem] border border-white/10 shadow-2xl transition hover:border-red-500/30">
+                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-amber-500 text-white px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-widest mb-6 shadow-lg shadow-red-600/30 animate-pulse">
+                    <i class="fa-solid fa-fire"></i> KHAI MẠC KHÓA HÈ ĐẶC BIỆT 2026
+                </span>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 uppercase italic tracking-tight leading-tight">
+                    HỌC VIỆN BÓNG ĐÁ <br><span class="text-yellow-400 bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent">NAM SƠN</span>
                 </h1>
-                <p class="text-lg mb-8 opacity-90 italic uppercase font-bold tracking-widest">Nền tảng vững chắc - Tương lai vươn xa</p>
-                <button onclick="scrollToSection('enroll')" class="inline-block bg-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-xl">ĐĂNG KÝ NGAY</button>
+                <p class="text-base sm:text-xl mb-10 opacity-90 italic uppercase font-bold tracking-widest text-slate-200">
+                    Bùng nổ năng lượng hè - Trải nghiệm sân cỏ chuyên nghiệp
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="scrollToSection('enroll')" class="w-full sm:w-auto bg-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-xl shadow-red-600/45 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-user-plus text-sm"></i> ĐĂNG KÝ HÈ ONLINE NGAY
+                    </button>
+                    <button onclick="scrollToSection('schedule-section')" class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-white px-8 py-4 rounded-full font-bold text-sm hover:text-yellow-400 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calendar-days text-yellow-400"></i> XEM LỊCH TẬP CHI TIẾT
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-50 border-b">
-        <div class="container mx-auto px-6">
+    <section id="features" class="py-24 bg-white relative border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-black italic uppercase mb-2">Vì sao nên chọn <span class="text-red-600">HVBĐ Nam Sơn</span></h2>
-                <div class="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase block mb-2">ƯU ĐIỂM VƯỢT TRỘI</span>
+                <h2 class="text-3xl md:text-4xl font-black italic uppercase mb-4">Vì sao nên chọn <span class="text-red-600">HVBĐ Nam Sơn</span>?</h2>
+                <div class="w-20 h-1.5 bg-red-600 mx-auto rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="feature-card p-8 rounded-2xl bg-white text-center">
-                    <div class="w-20 h-20 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                <!-- Card 1 -->
+                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:border-red-500 hover:bg-white hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm group-hover:bg-red-600 group-hover:text-white transition duration-300">
                         <i class="fas fa-building-columns"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 uppercase italic">Cơ sở vật chất</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Hệ thống sân bãi đạt chuẩn, an toàn, trang thiết bị tập luyện hiện đại hỗ trợ tối đa cho học viên.</p>
+                    <h3 class="text-lg font-bold mb-3 uppercase italic text-slate-900">Sân Bãi Đạt Chuẩn</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Hệ thống sân cỏ nhân tạo đạt tiêu chuẩn an toàn cao, hệ thống chiếu sáng và trang thiết bị hiện đại.</p>
                 </div>
-                <div class="feature-card p-8 rounded-2xl bg-white text-center">
-                    <div class="w-20 h-20 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                <!-- Card 2 -->
+                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:border-red-500 hover:bg-white hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm group-hover:bg-blue-900 group-hover:text-white transition duration-300">
                         <i class="fas fa-users-gear"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 uppercase italic">Đội ngũ HLV</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Các huấn luyện viên có bằng cấp chuyên môn cao, giàu kinh nghiệm và tâm huyết với bóng đá trẻ.</p>
+                    <h3 class="text-lg font-bold mb-3 uppercase italic text-slate-900">Đội ngũ HLV Chuyên Nghiệp</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Sở hữu bằng cấp đào tạo từ AFC/VFF, giàu kinh nghiệm, nắm bắt tốt tâm sinh lý của trẻ em.</p>
                 </div>
-                <div class="feature-card p-8 rounded-2xl bg-white text-center">
-                    <div class="w-20 h-20 bg-yellow-50 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                <!-- Card 3 -->
+                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:border-red-500 hover:bg-white hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-yellow-50 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm group-hover:bg-yellow-500 group-hover:text-white transition duration-300">
                         <i class="fas fa-book-open"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 uppercase italic">Giáo trình chuẩn</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Lộ trình đào tạo bài bản, kết hợp giữa kỹ năng bóng đá và phát triển thể chất toàn diện cho bé.</p>
+                    <h3 class="text-lg font-bold mb-3 uppercase italic text-slate-900">Giáo Trình Bản Quyền</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Áp dụng phương pháp hiện đại phối hợp rèn luyện tư duy chiến thuật, phát triển thể chất khoa học.</p>
                 </div>
-                <div class="feature-card p-8 rounded-2xl bg-white text-center">
-                    <div class="w-20 h-20 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                <!-- Card 4 -->
+                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:border-red-500 hover:bg-white hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm group-hover:bg-green-600 group-hover:text-white transition duration-300">
                         <i class="fas fa-angle-double-up"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 uppercase italic">Cơ hội phát triển</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Cơ hội tiến thẳng vào các đội trẻ của CLB Công An TP.HCM dành cho những tài năng xuất sắc.</p>
+                    <h3 class="text-lg font-bold mb-3 uppercase italic text-slate-900">Bệ Phóng Tài Năng</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Liên kết đào tạo trẻ, giới thiệu trực tiếp các tài năng xuất sắc vào tuyển trẻ CLB Công An TP.HCM.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Journey Section -->
-    <section id="journey" class="py-20 bg-white overflow-hidden border-b">
-        <div class="container mx-auto px-6">
+    <section id="journey" class="py-24 bg-slate-50 overflow-hidden border-b border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-black italic uppercase mb-2">Hành trình <span class="text-red-600">Hợp tác</span></h2>
-                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Sự kết hợp giữa Nam Sơn & CLB Công An TP.HCM</p>
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase block mb-2">QUY TRÌNH PHÁT TRIỂN</span>
+                <h2 class="text-3xl md:text-4xl font-black italic uppercase mb-2">Hành trình <span class="text-red-600">Hợp tác Chiến lược</span></h2>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Ươm mầm tài năng nhí cùng CLB Bóng đá Chuyên Nghiệp CAHN</p>
+                <div class="w-16 h-1.5 bg-navy-800 mx-auto rounded-full mt-4"></div>
             </div>
 
-            <div class="timeline-container max-w-5xl mx-auto">
-                <div class="timeline-line"></div>
-                <div class="timeline-item">
-                    <div class="timeline-icon" style="border-color: var(--color-navy);">
-                        <i class="fas fa-handshake text-blue-900"></i>
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Center vertical line (Desktop) -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-900 via-red-600 to-yellow-500 transform -translate-x-1/2 rounded"></div>
+
+                <!-- Timeline Step 1 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12 md:mb-16">
+                    <div class="flex justify-start w-full md:w-1/2 md:pr-12 md:text-right">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md transition hover:shadow-xl w-full">
+                            <span class="text-xs font-bold text-blue-900 bg-blue-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 1</span>
+                            <h4 class="text-lg font-black mt-3 uppercase text-slate-800">Ký kết Toàn diện</h4>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Học viện Nam Sơn chính thức trở thành một trong các vệ tinh tuyển trạch và đào tạo bóng đá trẻ hạt giống cho hệ thống đào tạo CLB Công An TP.HCM.</p>
+                        </div>
                     </div>
-                    <div class="timeline-content md:mr-auto md:ml-0 ml-auto mr-0 text-right md:text-right text-left">
-                        <span class="text-xs font-black text-blue-900 bg-blue-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 1</span>
-                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Ký kết chiến lược</h4>
-                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Học Viện Bóng Đá Nam Sơn chính thức trở thành đối tác đào tạo trẻ cho hệ thống CLB Công An TP.HCM.</p>
+                    <!-- Icon Indicator -->
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 border-4 border-blue-900 rounded-full flex items-center justify-center text-blue-900 shadow-md z-10 my-4 md:my-0">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Timeline Step 2 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12 md:mb-16">
+                    <div class="w-full md:w-1/2 pr-12 hidden md:block"></div>
+                    <!-- Icon Indicator -->
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 border-4 border-red-600 rounded-full flex items-center justify-center text-red-600 shadow-md z-10 my-4 md:my-0">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <div class="flex justify-start w-full md:w-1/2 md:pl-12">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md transition hover:shadow-xl w-full">
+                            <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 2</span>
+                            <h4 class="text-lg font-black mt-3 uppercase text-slate-800">Chuyển giao Giáo án</h4>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Đồng bộ hóa phương thức giáo huấn, bài tập kỹ-chiến thuật hiện đại kế thừa từ chương trình huấn luyện chuẩn quốc gia của Ban Huấn Luyện đội tuyển trẻ.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon" style="border-color: var(--color-red);">
-                        <i class="fas fa-futbol text-red-600"></i>
+
+                <!-- Timeline Step 3 -->
+                <div class="relative flex flex-col md:flex-row items-center">
+                    <div class="flex justify-start w-full md:w-1/2 md:pr-12 md:text-right">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md transition hover:shadow-xl w-full">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 3</span>
+                            <h4 class="text-lg font-black mt-3 uppercase text-slate-800">Tuyển chọn tài năng xuất sắc</h4>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Định kỳ tổ chức các ngày hội tuyển trạch, trực tiếp tuyển thẳng các em có tố chất vượt trội từ các lứa tuổi U9 - U15 vào đội năng khiếu tập trung của CLB.</p>
+                        </div>
                     </div>
-                    <div class="timeline-content md:ml-auto md:mr-0 ml-auto mr-0">
-                        <span class="text-xs font-black text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 2</span>
-                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Chuẩn hóa giáo án</h4>
-                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Áp dụng mô hình huấn luyện chuyên nghiệp từ CLB Công An TP.HCM vào học viện.</p>
+                    <!-- Icon Indicator -->
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 border-4 border-amber-500 rounded-full flex items-center justify-center text-amber-500 shadow-md z-10 my-4 md:my-0">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 pl-12 hidden md:block"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section (Interactive Tabs) -->
+    <section id="schedule-section" class="py-24 bg-white border-b border-slate-100">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-12">
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase block mb-2">QUY HOẠCH GIỜ TẬP</span>
+                <h2 class="text-3xl md:text-4xl font-black italic uppercase mb-4">Lịch học chi tiết & Quy định</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed">Để phụ huynh thuận tiện theo dõi và lựa chọn giờ tập phù hợp với gia đình, vui lòng lựa chọn các Cơ sở bên dưới để xem chi tiết lịch tập của lớp Sân 5, Sân 7 và Khóa Hè Đặc Biệt.</p>
+                <div class="w-16 h-1 bg-red-600 mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <!-- Tabs Nav -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 shadow-inner">
+                    <button onclick="switchScheduleTab('tab-cs1')" id="btn-tab-cs1" class="px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 bg-white text-red-600 shadow-sm">
+                        Cơ sở 1: Bắc Hải (Q.10)
+                    </button>
+                    <button onclick="switchScheduleTab('tab-cs2')" id="btn-tab-cs2" class="px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 text-slate-500 hover:text-slate-800">
+                        Cơ sở 2: Phú Thọ (Q.11)
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <!-- Left: Interactive Table Area -->
+                <div class="lg:col-span-2">
+                    <!-- Tab 1 Container (Bắc Hải) -->
+                    <div id="tab-cs1-content" class="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200/60 shadow-lg">
+                        <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                            <span class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center text-lg shadow-md"><i class="fa-solid fa-map-pin"></i></span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-lg">Cơ sở 1: Sân bóng đá Bắc Hải</h3>
+                                <p class="text-xs text-slate-500">137 Bắc Hải, Phường 15, Quận 10</p>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                                <thead class="bg-slate-100 font-oswald text-slate-700 tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">Phân lớp / Sân</th>
+                                        <th class="px-6 py-4">Ngày học định kỳ</th>
+                                        <th class="px-6 py-4">Khung thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-medium">
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-6 py-4 text-red-600 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 5</td>
+                                        <td class="px-6 py-4">Thứ Ba & Thứ Năm</td>
+                                        <td class="px-6 py-4">17:00 - 19:00</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-6 py-4 text-red-600 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 5</td>
+                                        <td class="px-6 py-4">Thứ Bảy & Chủ Nhật</td>
+                                        <td class="px-6 py-4">17:00 - 19:00</td>
+                                    </tr>
+                                    <tr class="bg-red-50/50">
+                                        <td colspan="3" class="px-6 py-3 text-xs text-red-500 italic font-semibold">
+                                            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Lưu ý: Cơ sở Bắc Hải chỉ khai thác các lớp Sân 5 định kỳ, không tổ chức khóa hè.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2 Container (Phú Thọ) -->
+                    <div id="tab-cs2-content" class="hidden bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200/60 shadow-lg">
+                        <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                            <span class="w-10 h-10 bg-blue-900 text-white rounded-xl flex items-center justify-center text-lg shadow-md"><i class="fa-solid fa-map-pin"></i></span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-lg">Cơ sở 2: Sân Phú Thọ</h3>
+                                <p class="text-xs text-slate-500">219 Lý Thường Kiệt, Phường 15, Quận 11</p>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mb-6">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                                <thead class="bg-slate-100 font-oswald text-slate-700 tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">Phân lớp / Sân</th>
+                                        <th class="px-6 py-4">Ngày học định kỳ</th>
+                                        <th class="px-6 py-4">Khung thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-medium">
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-6 py-4 text-blue-900 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 5</td>
+                                        <td class="px-6 py-4">Thứ Hai & Thứ Tư</td>
+                                        <td class="px-6 py-4">17:15 - 19:15 (Nhóm nhỏ)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-6 py-4 text-blue-900 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 5</td>
+                                        <td class="px-6 py-4">Thứ Ba & Thứ Năm</td>
+                                        <td class="px-6 py-4">
+                                            17:15 - 19:15 (Lớp lớn) <br>
+                                            17:30 - 19:30 (Lớp nhỏ)
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition">
+                                        <td class="px-6 py-4 text-blue-900 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 5</td>
+                                        <td class="px-6 py-4">Thứ Bảy & Chủ Nhật</td>
+                                        <td class="px-6 py-4">
+                                            Sáng: 07:30 - 09:30 <br>
+                                            Chiều: 15:00 - 17:00 | 17:00 - 19:00 | 17:30 - 19:30
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition border-t border-slate-200">
+                                        <td class="px-6 py-4 text-green-700 font-bold"><i class="fa-solid fa-circle-play mr-2"></i>LỚP SÂN 7</td>
+                                        <td class="px-6 py-4">Thứ Bảy & Chủ Nhật</td>
+                                        <td class="px-6 py-4">Chiều tối: 17:30 - 19:00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Lớp Hè Đặc Biệt Info -->
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-orange-200 rounded-2xl p-5">
+                            <h4 class="font-bold text-amber-800 text-sm uppercase flex items-center gap-2 mb-2">
+                                <i class="fa-solid fa-sun text-lg text-amber-500 animate-spin"></i> CHƯƠNG TRÌNH KHÓA HÈ ĐẶC BIỆT 2026 (TẠI PHÚ THỌ)
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold text-slate-700">
+                                <div class="bg-white p-3 rounded-xl border border-orange-100 shadow-sm">
+                                    <p class="text-amber-700 font-bold mb-1"><i class="fa-solid fa-calendar-day mr-1"></i> Lớp Thứ 2 - Thứ 4 - Thứ 6</p>
+                                    <p>Khung giờ: 07:30 - 09:30 (Sáng)</p>
+                                    <p class="text-slate-500 mt-1">Học phí: 82k/buổi (Đóng từ ngày bắt đầu đến kết thúc 14/08/2026)</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-orange-100 shadow-sm">
+                                    <p class="text-amber-700 font-bold mb-1"><i class="fa-solid fa-calendar-day mr-1"></i> Lớp Thứ 3 - Thứ 5</p>
+                                    <p>Khung giờ: 07:30 - 09:30 (Sáng)</p>
+                                    <p class="text-slate-500 mt-1">Học phí: 82k/buổi (Đóng từ ngày bắt đầu đến kết thúc 13/08/2026)</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon" style="border-color: var(--color-navy);">
-                        <i class="fas fa-trophy text-blue-900"></i>
-                    </div>
-                    <div class="timeline-content md:mr-auto md:ml-0 ml-auto mr-0 text-right md:text-right text-left">
-                        <span class="text-xs font-black text-blue-900 bg-blue-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 3</span>
-                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Tuyển chọn tài năng</h4>
-                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Học viên xuất sắc có cơ hội tiến cử trực tiếp vào các đội trẻ U9-U11-U13-U15 CLB Công An TP.HCM.</p>
+
+                <!-- Right: Rules and Regulations Box -->
+                <div class="bg-gradient-to-br from-slate-900 to-navy-950 p-8 rounded-3xl text-white shadow-xl h-full border border-slate-800">
+                    <h3 class="text-xl font-bold mb-4 uppercase text-yellow-400 border-b border-slate-700 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-list"></i> Quy định học viện
+                    </h3>
+                    <ul class="space-y-4 text-xs font-medium">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                            <span>Học viên khóa mới định kỳ đóng tối thiểu <strong>2 tháng</strong>. Riêng khóa hè đóng theo tổng số buổi thực tế từ ngày đăng ký đến ngày kết thúc khóa.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                            <span>Học phí khóa định kỳ nộp từ ngày <strong>1 đến ngày 8</strong> hàng tháng. Khóa hè thanh toán trọn gói 1 lần khi làm thủ tục nhập học.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                            <span>Học viện <strong>không bồi hoàn học phí</strong> khi tự ý nghỉ không lý do. Vui lòng báo phép để được bố trí học bù hợp lý.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                            <span>Học viên bắt buộc mang đầy đủ đồng phục học viện trong suốt thời gian tham gia các buổi huấn luyện.</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-6 border-t border-slate-800 text-center">
+                        <button onclick="scrollToSection('enroll')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl uppercase tracking-wider text-xs transition duration-300 w-full shadow-lg shadow-red-600/30">
+                            Đăng ký khóa học ngay <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -395,165 +559,125 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-black italic uppercase mb-2">Bảng học phí <span class="text-red-600">Niêm yết</span></h2>
-            <div class="flex flex-col items-center gap-4 mb-8">
-                <div class="inline-block bg-red-100 text-red-700 px-6 py-2 rounded-full font-black italic uppercase text-xs shadow-sm border border-red-200">
-                    ⚠️ Qui định: Học viên mới đăng ký lần đầu đóng tối thiểu 1 khóa (2 tháng)
+    <section id="pricing" class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-4 text-center max-w-6xl">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase block mb-2">QUY CHẾ TÀI CHÍNH</span>
+            <h2 class="text-3xl md:text-4xl font-black italic uppercase mb-2">Bảng học phí <span class="text-red-600">Niêm yết</span></h2>
+            <div class="w-16 h-1 bg-slate-900 mx-auto rounded-full mb-8"></div>
+            
+            <div class="flex flex-col items-center gap-4 mb-12">
+                <div class="inline-block bg-red-50 text-red-600 px-6 py-3 rounded-2xl font-black italic uppercase text-xs shadow-sm border border-red-200 max-w-lg">
+                    ⚠️ Học viên mới khóa định kỳ đóng tối thiểu 1 khóa (2 tháng). Khóa Hè đóng theo số buổi (82.000đ/buổi).
                 </div>
-                <!-- <button onclick="openModal()" class="btn-schedule">
-                    <i class="fas fa-calendar-days"></i> 
-                    Xem thông tin lịch học & thời gian chi tiết
-                </button> -->
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mb-12">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500 relative overflow-hidden">
-                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 5 CƠ BẢN</p>
-                    <p class="text-2xl font-black mt-1">400.000đ</p>
-                    <p class="text-[14px] text-gray-400">tháng (4 buổi)</p>
-                    <div class="mt-4 pt-4 border-t border-dashed">
-                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng 800.000đ</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mb-12">
+                <!-- Plan 1 -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-t-8 border-green-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Sân 5 cơ bản</span>
+                    <p class="text-3xl font-black text-slate-900 leading-none">400.000đ</p>
+                    <p class="text-xs text-slate-400 mt-2 font-bold uppercase">Tháng (1 buổi/tuần)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 border-dashed">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">Tổng 2 tháng:</span>
+                        <p class="text-sm font-black text-red-600 italic">800.000đ</p>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500">
-                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 5 NÂNG CAO</p>
-                    <p class="text-2xl font-black mt-1">650.000đ</p>
-                    <p class="text-[14px] text-gray-400">tháng (8 buổi)</p>
-                    <div class="mt-4 pt-4 border-t border-dashed">
-                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.300.000đ</p>
+
+                <!-- Plan 2 -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-t-8 border-red-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Sân 5 nâng cao</span>
+                    <p class="text-3xl font-black text-slate-900 leading-none">650.000đ</p>
+                    <p class="text-xs text-slate-400 mt-2 font-bold uppercase">Tháng (2 buổi/tuần)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 border-dashed">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">Tổng 2 tháng:</span>
+                        <p class="text-sm font-black text-red-600 italic">1.300.000đ</p>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
-                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 7 CƠ BẢN</p>
-                    <p class="text-2xl font-black mt-1">520.000đ</p>
-                    <p class="text-[14px] text-gray-400">tháng (4 buổi)</p>
-                    <div class="mt-4 pt-4 border-t border-dashed">
-                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.040.000đ</p>
+
+                <!-- Plan 3 -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-t-8 border-blue-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Sân 7 cơ bản</span>
+                    <p class="text-3xl font-black text-slate-900 leading-none">520.000đ</p>
+                    <p class="text-xs text-slate-400 mt-2 font-bold uppercase">Tháng (1 buổi/tuần)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 border-dashed">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">Tổng 2 tháng:</span>
+                        <p class="text-sm font-black text-red-600 italic">1.040.000đ</p>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-orange-500">
-                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 7 NÂNG CAO</p>
-                    <p class="text-2xl font-black mt-1">850.000đ</p>
-                    <p class="text-[14px] text-gray-400">tháng (8 buổi)</p>
-                    <div class="mt-4 pt-4 border-t border-dashed">
-                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.700.000đ</p>
+
+                <!-- Plan 4 -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-t-8 border-amber-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Sân 7 nâng cao</span>
+                    <p class="text-3xl font-black text-slate-900 leading-none">850.000đ</p>
+                    <p class="text-xs text-slate-400 mt-2 font-bold uppercase">Tháng (2 buổi/tuần)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 border-dashed">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">Tổng 2 tháng:</span>
+                        <p class="text-sm font-black text-red-600 italic">1.700.000đ</p>
                     </div>
                 </div>
-                <!-- <div class="bg-gray-900 p-6 rounded-xl shadow-sm border-t-4 border-yellow-500 text-white">
-                    <p class="text-[12px] font-bold text-yellow-500 uppercase">NĂNG KHIẾU</p>
-                    <p class="text-2xl font-black mt-1">1.500.000đ</p>
-                    <p class="text-[14px] text-gray-500 italic">tháng (12 buổi)</p>
-                    <div class="mt-4 pt-4 border-t border-dashed border-gray-700">
-                        <p class="text-[14px] font-bold text-yellow-500 italic">Khóa 2 tháng: 3.000.000đ</p>
-                    </div> -->
-                <!-- </div> -->
+
+                <!-- Plan 5 (Summer Course Card) -->
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-3xl shadow-lg border-2 border-yellow-300 text-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl pointer-events-none"></div>
+                    <div class="absolute left-2 top-2 bg-yellow-400 text-slate-900 text-[8px] font-black uppercase px-2 py-0.5 rounded-full">HOT HÈ 2026</div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest block mb-1 mt-1">KHÓA HÈ ĐẶC BIỆT</span>
+                    <p class="text-3xl font-black leading-none text-yellow-300">82.000đ</p>
+                    <p class="text-xs mt-2 font-bold uppercase text-amber-100">Buổi tập (Sáng 246 hoặc 35)</p>
+                    <div class="mt-4 pt-4 border-t border-white/20 border-dashed text-left">
+                        <span class="text-[9px] font-bold text-amber-200 block mb-0.5">Địa điểm: Phú Thọ (Q.11)</span>
+                        <span class="text-[9px] font-bold text-amber-200 block">Thời gian: 07:30 - 09:30</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-   
-    <!-- Modal Lịch Học Chi Tiết -->
-    <!-- <div id="scheduleModal" class="modal">
-        <div class="modal-content animate-in zoom-in duration-300">
-            <div class="bg-red-600 text-white p-6 flex justify-between items-center">
-                <h3 class="text-2xl font-black uppercase italic tracking-wider">Lịch học & Quy định học phí</h3>
-                <button onclick="closeModal()" class="text-white hover:text-gray-200 text-4xl leading-none">&times;</button>
-            </div>
-            <div class="p-6 md:p-10 overflow-x-auto bg-white">
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th class="w-1/3">Cơ sở 1: Bắc Hải<br><span class="text-[10px] font-normal lowercase">137 đường Bắc Hải, Quận 10</span></th>
-                            <th class="w-1/3">Cơ sở 2: Phú Thọ (Sân 5)<br><span class="text-[10px] font-normal lowercase">219 Lý Thường Kiệt, Quận 11</span></th>
-                            <th class="w-1/3">Cơ sở 2: Phú Thọ (Sân 7)<br><span class="text-[10px] font-normal lowercase">219 Lý Thường Kiệt, Quận 11</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left font-bold text-gray-800">
-                                <p class="text-red-600 mb-2 uppercase italic border-b">Lớp Sân 5:</p>
-                                <p class="text-gray-600 mb-1">Thứ 3 - Thứ 5:</p>
-                                <p class="mb-4">17:00 - 19:00</p>
-                                <p class="text-gray-600 mb-1">Thứ 7 - Chủ Nhật:</p>
-                                <p>17:00 - 19:00</p>
-                            </td>
-                            <td class="text-left font-bold text-gray-800">
-                                <p class="text-blue-900 mb-1 uppercase">Thứ 2 - Thứ 4:</p>
-                                <p class="mb-4">(17:15 - 19:15)</p>
-                                <p class="text-blue-900 mb-1 uppercase">Thứ 3 - Thứ 5:</p>
-                                <p>(17:30 - 19:30) Nhỏ</p>
-                                <p class="mb-4">(17:15 - 19:15) Lớn</p>
-                                <p class="text-blue-900 mb-1 uppercase">Thứ 7 - Chủ nhật:</p>
-                                <p>(07:30 - 09:30) | (15:00 - 17:00)</p>
-                                <p>(17:00 - 19:00) | (17:30 - 19:30)</p>
-                            </td>
-                            <td class="text-left font-bold text-gray-800">
-                                <p class="text-green-700 mb-2 uppercase">Thứ 7 - Chủ nhật:</p>
-                                <p>(17:30 - 19:00)</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg border-l-4 border-red-600">
-                    <h4 class="font-black text-sm mb-2 italic">QUY ĐỊNH HỌC PHÍ</h4>
-                    <ul class="text-xs space-y-1 font-medium list-disc list-inside">
-                        <li>Học viên mới đăng ký lần đầu đóng 1 khóa (2 tháng).</li>
-                        <li>Đóng học phí từ đầu tháng đến ngày 8 hàng tháng.</li>
-                        <li>Không bồi hoàn học phí hoặc bù ngày nghỉ cá nhân.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bg-gray-100 p-4 text-center">
-                <button onclick="closeModal()" class="bg-black text-white px-10 py-3 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gray-800 transition">Đóng thông tin</button>
-            </div>
-        </div>
-    </div> -->
-
     <!-- Location Section -->
-    <section id="location" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <div class="inline-block px-4 py-2 bg-red-600 text-white rounded-lg font-bold text-xs uppercase italic tracking-widest shadow-lg mb-4">Mạng lưới đào tạo</div>
-                <h2 class="text-4xl font-black uppercase italic leading-tight">Cơ sở <span class="text-red-600">Tập luyện</span></h2>
+    <section id="location" class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase block mb-2">HỆ THỐNG CƠ SỞ CHÍNH</span>
+                <h2 class="text-3xl md:text-4xl font-black italic uppercase leading-tight">Mạng lưới <span class="text-red-600">Sân tập luyện</span></h2>
+                <div class="w-16 h-1 bg-red-600 mx-auto rounded-full mt-4"></div>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
+                <!-- Cơ sở 1 -->
+                <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/55 shadow-xl flex flex-col h-full transition transform hover:scale-[1.01] hover:shadow-2xl">
                     <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
-                            <i class="fas fa-map-marker-alt"></i>
+                        <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4 shadow-red-600/30">
+                            <i class="fas fa-map-marker-alt animate-bounce"></i>
                         </div>
                         <div>
-                            <h3 class="font-black text-xl uppercase italic leading-tight">Cơ sở chính</h3>
-                            <p class="text-xs font-bold text-red-600 uppercase">Quận 10 - TP.HCM</p>
+                            <h3 class="font-black text-xl uppercase italic leading-tight text-slate-900">Cơ sở chính (Q.10)</h3>
+                            <p class="text-xs font-bold text-red-600 uppercase">Sân bóng đá Bắc Hải</p>
                         </div>
                     </div>
-                    <div class="space-y-4 flex-grow mb-8 text-gray-900 font-bold text-lg leading-snug">
-                        137 Bắc Hải, P. Hòa Hưng, Quận 10, TP.HCM
-                    </div>
-                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
+                    <p class="text-slate-800 font-bold text-base leading-snug mb-6 flex-grow">
+                        <i class="fa-solid fa-map-location-dot text-slate-400 mr-2"></i> 137 Bắc Hải, Phường 15, Quận 10, TP.HCM
+                    </p>
+                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-4 border-white shadow-slate-300">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.467406859577!2d106.6622831746535!3d10.775466859210086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752edca2608447%3A0x6b6311681284a1e9!2zMTM3IELhuq9jIEjhuqNpLCBQaMaw4budbmcgMTUsIFF14bqtbiAxMCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1714570000000!5m2!1svi!2s" 
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
+                <!-- Cơ sở 2 -->
+                <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/55 shadow-xl flex flex-col h-full transition transform hover:scale-[1.01] hover:shadow-2xl">
                     <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
-                            <i class="fas fa-map-marker-alt"></i>
+                        <div class="w-14 h-14 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4 shadow-blue-900/30">
+                            <i class="fas fa-map-marker-alt animate-bounce"></i>
                         </div>
                         <div>
-                            <h3 class="font-black text-xl uppercase italic leading-tight">Cơ sở khác</h3>
-                            <p class="text-xs font-bold text-blue-900 uppercase">Quận 11 - TP.HCM</p>
+                            <h3 class="font-black text-xl uppercase italic leading-tight text-slate-900">Cơ sở Phú Thọ (Q.11)</h3>
+                            <p class="text-xs font-bold text-blue-900 uppercase">Khu liên hợp Phú Thọ</p>
                         </div>
                     </div>
-                    <div class="space-y-4 flex-grow mb-8 text-gray-900 font-bold text-lg leading-snug">
-                        219 Lý Thường Kiệt, Quận 11, TP.HCM
-                    </div>
-                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
+                    <p class="text-slate-800 font-bold text-base leading-snug mb-6 flex-grow">
+                        <i class="fa-solid fa-map-location-dot text-slate-400 mr-2"></i> 219 Lý Thường Kiệt, Phường 15, Quận 11, TP.HCM
+                    </p>
+                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-4 border-white shadow-slate-300">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.646589333907!2d106.65604137465335!3d10.761706859458928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eef8e053fcf%3A0xf650f92275681640!2zMjE5IEzDvSBUaMaw4budbmcgS2nhu4d0LCBQaMaw4budbmcgMTUsIFF14bqtbiAxMSwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1714570100000!5m2!1svi!2s" 
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -564,12 +688,12 @@
     </section>
 
     <!-- Hotline Section -->
-    <div class="bg-gray-100 pt-16">
-        <div class="container mx-auto px-6 max-w-4xl text-center">
-            <div class="bg-white rounded-t-[3rem] p-8 md:p-12 border-x border-t border-gray-200">
+    <div class="bg-slate-100 pt-16 no-print">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <div class="bg-white rounded-t-[3rem] p-8 md:p-12 border-x border-t border-slate-200 shadow-lg">
                 <div class="mb-6">
                     <p class="text-xs font-black uppercase text-red-600 italic tracking-widest mb-2">Liên hệ nhanh để được tư vấn lộ trình phù hợp</p>
-                    <h3 class="text-2xl font-black uppercase italic text-gray-900">Hotline <span class="text-red-600">Tuyển Sinh</span></h3>
+                    <h3 class="text-2xl font-black uppercase italic text-slate-900">Hotline Tư Vấn <span class="text-red-600">Tuyển Sinh</span></h3>
                 </div>
                 
                 <div class="flex flex-col items-center">
@@ -578,8 +702,8 @@
                             <i class="fas fa-phone-alt text-2xl"></i>
                         </div>
                         <div class="text-left">
-                            <span class="block text-[10px] font-black uppercase opacity-90 leading-none mb-1">Gọi ngay cho chúng tôi</span>
-                            <span class="block text-3xl font-black tracking-tighter leading-none">0869.426.975</span>
+                            <span class="block text-[10px] font-black uppercase opacity-90 leading-none mb-1">Gọi ngay trực tiếp</span>
+                            <span class="block text-2xl sm:text-3xl font-black tracking-tighter leading-none">0869.426.975</span>
                         </div>
                     </a>
                 </div>
@@ -587,209 +711,471 @@
         </div>
     </div>
 
-<!-- Enrollment Form -->
-    <section id="enroll" class="py-12 bg-gray-100 no-print">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-xl border border-gray-200">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-black italic uppercase">Phiếu ghi <span class="text-red-600">Học phí</span></h2>
-                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-2">Đăng ký khóa đào tạo mới</p>
+    <!-- Enrollment Form Section -->
+    <section id="enroll" class="py-16 bg-slate-100 no-print">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left: Form inputs -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-10 rounded-[2.5rem] shadow-xl border border-slate-200">
+                    <div class="text-center lg:text-left mb-8">
+                        <span class="text-red-600 font-extrabold text-xs tracking-widest uppercase block mb-1">HỌC VIỆN NAM SƠN</span>
+                        <h2 class="text-3xl font-black italic uppercase">Phiếu ghi danh & <span class="text-red-600">Đăng ký học</span></h2>
+                        <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Vui lòng điền đúng thông tin của bé và phụ huynh</p>
+                        <div class="w-12 h-1 bg-red-600 rounded-full mt-3 mx-auto lg:mx-0"></div>
+                    </div>
+
+                    <form id="footballForm" class="space-y-6">
+                        <!-- Personal Info -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Họ tên phụ huynh *</label>
+                                <input type="text" id="parentName" placeholder="Vd: Nguyễn Văn A" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-red-600 outline-none transition font-medium text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Số điện thoại liên hệ *</label>
+                                <input type="tel" id="phoneNumber" placeholder="Sử dụng Zalo nhận lịch học" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-red-600 outline-none transition font-medium text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Họ tên học viên *</label>
+                                <input type="text" id="studentName" placeholder="Tên của bé" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-red-600 outline-none transition font-medium text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Năm sinh của bé *</label>
+                                <input type="number" id="birthYear" placeholder="Vd: 2015" min="2005" max="2024" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-red-600 outline-none transition font-medium text-sm" required>
+                            </div>
+                        </div>
+
+                        <!-- Course Program Selection -->
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Chương trình học tập của bé *</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <input type="radio" id="program-regular" name="courseProgram" value="regular" class="hidden radio-custom" checked onchange="toggleProgramMode()">
+                                    <label for="program-regular" class="block text-center py-3 px-4 border rounded-xl font-bold text-xs cursor-pointer select-none">KHÓA ĐỊNH KỲ (ĐÓNG 2 THÁNG)</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="program-summer" name="courseProgram" value="summer" class="hidden radio-custom" onchange="toggleProgramMode()">
+                                    <label for="program-summer" class="block text-center py-3 px-4 border rounded-xl font-bold text-xs cursor-pointer select-none text-orange-600 border-orange-200 hover:bg-orange-50">KHÓA HÈ ĐẶC BIỆT 2026 (PHÚ THỌ)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Class Details -->
+                        <div class="space-y-4 pt-4 border-t border-dashed border-slate-200">
+                            <p class="text-xs font-black uppercase text-slate-700 italic flex items-center gap-2">
+                                <span class="w-5 h-5 bg-slate-100 rounded-full flex items-center justify-center text-[10px] text-red-600 font-bold">1</span>
+                                Địa điểm & Lịch tập mong muốn
+                            </p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2" id="labelLocationSelect">Lựa chọn Cơ sở tập</label>
+                                    <select id="locationSelect" onchange="updateLogic()" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 font-bold text-sm outline-none cursor-pointer">
+                                        <option value="cs2" selected>Cơ sở 2: Phú Thọ (Q.11)</option>
+                                        <option value="cs1">Cơ sở 1: Bắc Hải (Q.10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2" id="labelPType">Loại hình sân tập</label>
+                                    <div class="flex gap-2">
+                                        <input type="radio" id="p5" name="pType" value="5" class="hidden radio-custom" checked onchange="updateLogic()">
+                                        <label for="p5" class="flex-1 text-center py-3.5 border rounded-xl font-bold text-xs cursor-pointer select-none">SÂN 5</label>
+                                        
+                                        <input type="radio" id="p7" name="pType" value="7" class="hidden radio-custom" onchange="updateLogic()">
+                                        <label for="p7" id="labelP7" class="flex-1 text-center py-3.5 border rounded-xl font-bold text-xs cursor-pointer select-none">SÂN 7</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Summer Specific Selection (Hidden for Regular) -->
+                            <div id="summer-inputs-container" class="hidden space-y-4 p-4 bg-orange-50 border border-orange-200 rounded-2xl animate-fade-in">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold text-amber-800 uppercase mb-2">Chọn lớp học hè *</label>
+                                        <select id="summerClassPattern" onchange="onSummerPatternChange()" class="w-full px-3 py-3 rounded-xl border border-orange-200 bg-white font-bold text-xs outline-none cursor-pointer">
+                                            <option value="t246" selected>Lớp Thứ 2 - Thứ 4 - Thứ 6 (Kết thúc 14/08)</option>
+                                            <option value="t35">Lớp Thứ 3 - Thứ 5 (Kết thúc 13/08)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-amber-800 uppercase mb-2">Ngày bắt đầu học của bé *</label>
+                                        <input type="date" id="summerStartDate" min="2026-06-05" max="2026-08-12" onchange="calculateAll()" class="w-full px-3 py-3 rounded-xl border border-orange-200 bg-white font-bold text-xs outline-none">
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border border-orange-100 text-xs text-orange-800 font-semibold flex items-center justify-between">
+                                    <span>Học phí khóa hè: <strong class="text-orange-600">82.000đ / buổi</strong></span>
+                                    <span id="summerSessionsCount">Số buổi: 0</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2" id="daysSelectionSection">
+                                <p class="text-[10px] font-bold text-slate-500 uppercase italic">Chọn ngày tập luyện trong tuần:</p>
+                                <div class="flex flex-wrap gap-2" id="days-container">
+                                    <input type="checkbox" id="t2" value="T2" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t2" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T2</label>
+                                    <input type="checkbox" id="t3" value="T3" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t3" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T3</label>
+                                    <input type="checkbox" id="t4" value="T4" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t4" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T4</label>
+                                    <input type="checkbox" id="t5" value="T5" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t5" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T5</label>
+                                    <input type="checkbox" id="t6" value="T6" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t6" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T6</label>
+                                    <input type="checkbox" id="t7" value="T7" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t7" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">T7</label>
+                                    <input type="checkbox" id="cn" value="CN" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="cn" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-sm cursor-pointer select-none transition">CN</label>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase">Khung giờ tập cụ thể</label>
+                                <select id="timeSlot" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 font-bold text-sm outline-none cursor-pointer" required onchange="calculateAll()">
+                                    <!-- Populated automatically based on logic -->
+                                </select>
+                            </div>
+                            
+                            <p id="noteLogic" class="text-xs text-red-500 italic font-bold bg-red-50 p-3 rounded-xl border border-red-100 hidden"></p>
+                        </div>
+
+                        <!-- Equipments registration -->
+                        <div class="space-y-4 pt-4 border-t border-dashed border-slate-200">
+                            <p class="text-xs font-black uppercase text-slate-700 italic flex items-center gap-2">
+                                <span class="w-5 h-5 bg-slate-100 rounded-full flex items-center justify-center text-[10px] text-red-600 font-bold">2</span>
+                                Đăng ký Đồng phục & Trang bị (Khuyên dùng)
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <!-- Đồng phục -->
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between" id="cardUniform">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="font-bold text-sm text-slate-900">Đồng Phục</h4>
+                                            <span class="text-red-600 font-black text-xs">120k</span>
+                                        </div>
+                                        <select id="sizeUniform" class="w-full text-xs p-2 border rounded-lg bg-white outline-none mb-3">
+                                            <option value="">Chọn Size Áo (Kèm thông số)</option>
+                                            <option value="7">Size 7 (5-6 tuổi | 105-115cm | 18-22kg)</option>
+                                            <option value="9">Size 9 (7-8 tuổi | 115-125cm | 22-26kg)</option>
+                                            <option value="11">Size 11 (9-10 tuổi | 125-135cm | 26-30kg)</option>
+                                            <option value="13">Size 13 (11-12 tuổi | 135-145cm | 30-36kg)</option>
+                                            <option value="15">Size 15 (13-14 tuổi | 145-152cm | 36-42kg)</option>
+                                            <option value="M">Size M (14+ tuổi | 152-160cm | 42-48kg)</option>
+                                            <option value="L">Size L (Cao 160-167cm | Nặng 48-55kg)</option>
+                                            <option value="XL">Size XL (Cao 167-172cm | Nặng 55-63kg)</option>
+                                            <option value="XXL">Size XXL (Cao 172-178cm | Nặng 63-72kg)</option>
+                                            <option value="XXXL">Size XXXL (Cao >178cm | Nặng >72kg)</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <div class="flex items-center space-x-2 bg-white rounded-lg border px-2 py-1">
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtyUniform', -1)">-</button>
+                                            <input type="number" id="qtyUniform" value="1" class="w-6 text-center font-bold text-sm bg-transparent outline-none pointer-events-none" readonly>
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtyUniform', 1)">+</button>
+                                        </div>
+                                        <span class="text-xs font-bold text-slate-400" id="subUniform">120k</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tất vớ -->
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between" id="cardSock">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="font-bold text-sm text-slate-900">Vớ Dài</h4>
+                                            <span class="text-red-600 font-black text-xs">25k</span>
+                                        </div>
+                                        <p class="text-[10px] text-slate-400 mb-3 italic">Co giãn ôm chân bọc ốp</p>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <div class="flex items-center space-x-2 bg-white rounded-lg border px-2 py-1">
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtySock', -1)">-</button>
+                                            <input type="number" id="qtySock" value="0" class="w-6 text-center font-bold text-sm bg-transparent outline-none pointer-events-none" readonly>
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtySock', 1)">+</button>
+                                        </div>
+                                        <span class="text-xs font-bold text-slate-400" id="subSock">0đ</span>
+                                    </div>
+                                </div>
+
+                                <!-- Giày đá banh -->
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between" id="cardShoe">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="font-bold text-sm text-slate-900">Giày Chuyên Dụng</h4>
+                                            <span class="text-red-600 font-black text-xs">220k</span>
+                                        </div>
+                                        <select id="sizeShoe" class="w-full text-xs p-2 border rounded-lg bg-white outline-none mb-3">
+                                            <option value="">Chọn Size Giày</option>
+                                            <script>for(let i=34; i<=44; i++) document.write(`<option value="${i}">Size ${i}</option>`);</script>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <div class="flex items-center space-x-2 bg-white rounded-lg border px-2 py-1">
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtyShoe', -1)">-</button>
+                                            <input type="number" id="qtyShoe" value="0" class="w-6 text-center font-bold text-sm bg-transparent outline-none pointer-events-none" readonly>
+                                            <button type="button" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded font-bold text-sm" onclick="updateQty('qtyShoe', 1)">+</button>
+                                        </div>
+                                        <span class="text-xs font-bold text-slate-400" id="subShoe">0đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-2xl text-lg uppercase shadow-xl hover:shadow-red-600/30 transition transform hover:scale-[1.01] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-receipt"></i> XUẤT HÓA ĐƠN GHI DANH
+                        </button>
+                    </form>
                 </div>
 
-                <form id="footballForm" class="space-y-8">
-                    <!-- Thông tin cơ bản -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border bg-gray-50 focus:border-red-600 outline-none transition font-medium" required>
-                        <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border bg-gray-50 focus:border-red-600 outline-none transition font-medium" required>
-                        <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border bg-gray-50 focus:border-red-600 outline-none transition font-medium" required>
-                        <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border bg-gray-50 focus:border-red-600 outline-none transition font-medium" required>
-                    </div>
+                <!-- Right: REAL-TIME INVOICE BREAKDOWN PREVIEW -->
+                <div class="lg:col-span-5 flex flex-col justify-start">
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-navy-950 p-8 rounded-[2.5rem] text-white shadow-xl border border-slate-800 sticky top-28">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+                            <div>
+                                <h3 class="font-bold text-lg text-yellow-400">Xem trước hóa đơn</h3>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Tính toán học phí tức thì</p>
+                            </div>
+                            <span class="text-xs bg-red-600/25 text-red-500 border border-red-600/35 px-2.5 py-1 rounded-full font-bold uppercase"><i class="fa-solid fa-calculator mr-1"></i> Live</span>
+                        </div>
 
-                    <!-- Lịch học & Khung giờ -->
-                    <div class="space-y-4 pt-4 border-t border-dashed">
-                        <p class="text-xs font-black uppercase text-gray-500 italic">1. Địa điểm, Loại sân & Lịch tập</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <select id="locationSelect" onchange="updateLogic()" class="w-full px-4 py-4 rounded-xl border bg-gray-50 font-bold text-sm outline-none cursor-pointer">
-                                <option value="cs2">Cơ sở 2: Phú Thọ (Q.11)</option>
-                                <option value="cs1">Cơ sở 1: Bắc Hải (Q.10)</option>
-                            </select>
-                            <div class="flex gap-2">
-                                <input type="radio" id="p5" name="pType" value="5" class="hidden radio-custom" checked onchange="updateLogic()"><label for="p5" class="flex-1 text-center py-4 border rounded-xl font-bold text-[10px] cursor-pointer">SÂN 5</label>
-                                <input type="radio" id="p7" name="pType" value="7" class="hidden radio-custom" onchange="updateLogic()"><label for="p7" id="labelP7" class="flex-1 text-center py-4 border rounded-xl font-bold text-[10px] cursor-pointer">SÂN 7</label>
+                        <!-- Real-time bill entries container -->
+                        <div class="space-y-4 mb-8 min-h-[160px] text-sm">
+                            <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-black tracking-wider border-b border-slate-800/80 pb-2">
+                                <span>Khoản thu</span>
+                                <span>Tạm tính</span>
+                            </div>
+                            <div id="bill-items-list" class="space-y-3">
+                                <!-- Dynamically loaded -->
+                                <p class="text-slate-500 italic text-center py-6 text-xs">Vui lòng hoàn tất biểu mẫu đăng ký bên cạnh để hiển thị tạm tính chi phí...</p>
                             </div>
                         </div>
 
-                        <div class="space-y-2">
-                             <p class="text-[10px] font-bold text-gray-400 uppercase italic">Chọn ngày tập luyện (Phí tính theo số buổi/tuần):</p>
-                             <div class="flex flex-wrap gap-2" id="days-container">
-                                <input type="checkbox" id="t2" value="T2" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t2" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T2</label>
-                                <input type="checkbox" id="t3" value="T3" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t3" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T3</label>
-                                <input type="checkbox" id="t4" value="T4" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t4" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T4</label>
-                                <input type="checkbox" id="t5" value="T5" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t5" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T5</label>
-                                <input type="checkbox" id="t6" value="T6" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t6" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T6</label>
-                                <input type="checkbox" id="t7" value="T7" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="t7" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">T7</label>
-                                <input type="checkbox" id="cn" value="CN" class="hidden checkbox-custom day-check" onchange="updateLogic()"><label for="cn" class="w-12 h-12 border rounded-xl flex items-center justify-center font-bold text-xs cursor-pointer">CN</label>
-                            </div>
+                        <!-- Footnote rules info -->
+                        <div class="bg-white/5 rounded-2xl p-4 border border-white/5 mb-8 text-xs text-slate-300">
+                            <p class="font-bold mb-1.5 text-yellow-500"><i class="fa-solid fa-lightbulb mr-1"></i> Thông tin hữu ích:</p>
+                            <p class="leading-relaxed" id="invoiceInstructionNotes">Khóa đóng tối thiểu 2 tháng đã được nhân đôi trực tiếp. Đồng phục học viện là bắt buộc đối với tất cả học viên mới.</p>
                         </div>
 
-                        <div class="space-y-2">
-                            <p class="text-[10px] font-bold text-gray-400 uppercase italic">Chọn khung giờ tập luyện:</p>
-                            <select id="timeSlot" class="w-full px-4 py-4 rounded-xl border bg-gray-50 font-bold text-sm outline-none cursor-pointer" required onchange="calculateAll()">
-                                <!-- Cập nhật qua JS -->
-                            </select>
-                        </div>
-                        
-                        <p id="noteLogic" class="text-[10px] text-red-500 italic font-bold"></p>
-                    </div>
-
-                    <!-- Trang bị -->
-                    <div class="space-y-4 pt-4 border-t border-dashed">
-                        <p class="text-xs font-black uppercase text-gray-500 italic">2. Đăng ký Trang bị & Đồng phục</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- Bộ Đồng Phục -->
-                            <div class="item-card flex flex-col justify-between" id="cardUniform">
-                                <div>
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h4 class="font-bold text-sm">Đồng phục</h4>
-                                        <span class="text-red-600 font-black text-xs">120k</span>
-                                    </div>
-                                    <select id="sizeUniform" class="w-full text-xs p-2 border rounded-lg bg-white outline-none mb-4">
-                                        <option value="">Chọn Size Áo</option>
-                                        <option value="S">Size S</option>
-                                        <option value="M">Size M</option>
-                                        <option value="L">Size L</option>
-                                        <option value="XL">Size XL</option>
-                                        <option value="XXL">Size XXL</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtyUniform', -1)">-</button>
-                                        <input type="number" id="qtyUniform" value="1" class="w-6 text-center font-bold text-sm bg-transparent outline-none" readonly>
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtyUniform', 1)">+</button>
-                                    </div>
-                                    <span class="text-xs font-bold text-gray-400" id="subUniform">120k</span>
-                                </div>
+                        <!-- Total display -->
+                        <div class="bg-slate-950/80 border border-slate-800/60 p-6 rounded-2xl flex justify-between items-center">
+                            <div>
+                                <span class="text-[10px] text-slate-400 font-extrabold uppercase block tracking-wider">TỔNG KHÓA ĐẦU TIÊN:</span>
+                                <span id="preview-calc-detail" class="text-[11px] text-slate-500 italic">Tính từ số tháng + trang bị</span>
                             </div>
-
-                            <!-- Vớ -->
-                            <div class="item-card flex flex-col justify-between" id="cardSock">
-                                <div>
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h4 class="font-bold text-sm">Vớ (Tất)</h4>
-                                        <span class="text-red-600 font-black text-xs">25k</span>
-                                    </div>
-                                    <p class="text-[10px] text-gray-400 italic mb-4">Dài chuyên dụng</p>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtySock', -1)">-</button>
-                                        <input type="number" id="qtySock" value="0" class="w-6 text-center font-bold text-sm bg-transparent outline-none" readonly>
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtySock', 1)">+</button>
-                                    </div>
-                                    <span class="text-xs font-bold text-gray-400" id="subSock">0k</span>
-                                </div>
-                            </div>
-
-                            <!-- Giày -->
-                            <div class="item-card flex flex-col justify-between" id="cardShoe">
-                                <div>
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h4 class="font-bold text-sm">Giày bóng đá</h4>
-                                        <span class="text-red-600 font-black text-xs">220k</span>
-                                    </div>
-                                    <select id="sizeShoe" class="w-full text-xs p-2 border rounded-lg bg-white outline-none mb-4">
-                                        <option value="">Chọn Size Giày</option>
-                                        <script>for(let i=34; i<=44; i++) document.write(`<option value="${i}">Size ${i}</option>`);</script>
-                                    </select>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtyShoe', -1)">-</button>
-                                        <input type="number" id="qtyShoe" value="0" class="w-6 text-center font-bold text-sm bg-transparent outline-none" readonly>
-                                        <button type="button" class="qty-btn" onclick="updateQty('qtyShoe', 1)">+</button>
-                                    </div>
-                                    <span class="text-xs font-bold text-gray-400" id="subShoe">0k</span>
-                                </div>
-                            </div>
+                            <p class="text-3xl font-black text-white" id="totalAmount">0đ</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Footer & Total -->
-                    <div class="bg-gray-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div class="text-center md:text-left">
-                            <p class="text-[10px] text-yellow-400 font-bold uppercase mb-1 tracking-widest">TỔNG PHÍ KHÓA ĐẦU (2 THÁNG + TRANG BỊ)</p>
-                            <p id="calc-detail" class="text-xs text-gray-400 italic font-medium">Đang tính toán...</p>
-                        </div>
-                        <div class="text-4xl font-black" id="totalAmount">0đ</div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-red-600 text-white font-black py-5 rounded-2xl text-lg uppercase shadow-xl hover:bg-red-700 transition transform hover:scale-[1.01]">XUẤT HÓA ĐƠN GHI DANH</button>
-                </form>
             </div>
         </div>
     </section>
 
     <!-- Modal Invoice -->
-    <div id="invoiceModal" class="modal no-print">
-        <div class="modal-content">
-            <div class="p-8 md:p-12 relative">
-                <div class="flex justify-between items-start border-b-4 border-red-600 pb-6 mb-8">
+    <div id="invoiceModal" class="modal fixed inset-0 z-[1100] hidden items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-2xl overflow-hidden shadow-2xl border-4 border-red-600 my-8">
+            <div class="p-8 sm:p-12 print-invoice">
+                
+                <!-- Invoice Header -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-4 border-red-600 pb-6 mb-8 gap-4">
                     <div class="flex items-center space-x-4">
-                        <img src="image_3ebd48.png" alt="Logo" class="h-16 w-16" onerror="this.src='https://via.placeholder.com/60?text=NS'">
+                        <div class="w-14 h-14 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center p-0.5">
+                            <img id="modal-main-logo" src="image_3ebd48.png" alt="Logo" class="h-full w-full object-contain" onerror="loadFallbackLogo(this, 'NS', '#002d72')">
+                        </div>
                         <div>
-                            <h2 class="text-2xl font-black leading-none uppercase">Học Viện Bóng Đá Nam Sơn</h2>
-                            <p class="text-[10px] font-bold text-red-600 mt-1 uppercase">Hóa đơn đăng ký & Biên nhận học phí</p>
+                            <h2 class="text-2xl font-black leading-none uppercase text-slate-900">Nam Sơn Football</h2>
+                            <p class="text-[10px] font-bold text-red-600 mt-1 uppercase tracking-widest">Học viện bóng đá liên kết chiến lược</p>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <p class="text-xs font-bold text-gray-400 uppercase">Mã: #NS<span id="invId">0000</span></p>
-                        <p class="text-xs font-bold" id="invDate"></p>
+                    <div class="text-left sm:text-right">
+                        <p class="text-xs font-black text-slate-400 uppercase tracking-wider">Số HĐ: <span id="invId" class="text-slate-800">#NS0000</span></p>
+                        <p class="text-xs font-bold text-slate-500 mt-0.5" id="invDate">Ngày lập: --/--/----</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-8 mb-8">
+                <!-- Parents & Kid Info -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 border-b pb-6 text-sm">
                     <div>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase mb-2 italic">Phụ huynh</p>
-                        <p class="font-bold uppercase text-sm" id="invParent"></p>
-                        <p class="text-xs" id="invPhone"></p>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase mb-1.5 block tracking-wider">Thông tin phụ huynh:</span>
+                        <p class="font-extrabold uppercase text-slate-800" id="invParent">-</p>
+                        <p class="text-slate-500 mt-0.5 font-semibold" id="invPhone">SĐT: -</p>
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase mb-2 italic">Học viên</p>
-                        <p class="font-bold uppercase text-sm" id="invStudent"></p>
-                        <p class="text-xs italic" id="invBirth"></p>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase mb-1.5 block tracking-wider">Thông tin học viên:</span>
+                        <p class="font-extrabold uppercase text-slate-800" id="invStudent">-</p>
+                        <p class="text-slate-500 mt-0.5 font-semibold" id="invBirth">Năm sinh: -</p>
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-2xl p-6 mb-8">
-                    <div class="grid grid-cols-1 gap-3 text-xs" id="invDetails"></div>
+                <!-- Invoice items detail list -->
+                <div class="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
+                    <div id="invDetails" class="space-y-4">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
 
-                <div class="border-t-2 border-dashed pt-6 flex justify-between items-center">
+                <!-- Footer Summary info -->
+                <div class="border-t-2 border-dashed border-slate-200 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase italic">Hình thức: Thanh toán khi ghi danh</p>
-                      
+                        <span class="text-[10px] font-bold text-slate-400 uppercase block tracking-wider">Hình thức thanh toán:</span>
+                        <p class="text-xs font-bold text-slate-600 mt-1 uppercase"><i class="fa-solid fa-money-bill-transfer text-emerald-600 mr-1"></i> Ghi danh & đóng trực tiếp</p>
                     </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase">TỔNG CỘNG</p>
-                        <p class="text-3xl font-black text-gray-900" id="invTotal"></p>
+                    <div class="text-left sm:text-right">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">TỔNG SỐ TIỀN THANH TOÁN</span>
+                        <p class="text-3xl font-black text-slate-900 mt-1" id="invTotal">0đ</p>
                     </div>
                 </div>
 
-                <div class="mt-10 pt-10 border-t flex justify-between items-center no-print">
-                    <button onclick="window.print()" class="flex items-center space-x-2 text-xs font-black uppercase text-gray-500 hover:text-red-600">
-                        <i class="fas fa-print"></i> <span>In hóa đơn</span>
+                <!-- Action buttons -->
+                <div class="mt-10 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
+                    <button onclick="window.print()" class="flex items-center gap-2 text-sm font-black uppercase text-slate-500 hover:text-red-600 transition">
+                        <i class="fas fa-print text-base"></i> <span>In phiếu biên nhận</span>
                     </button>
-                    <button onclick="closeInvoice()" class="bg-black text-white px-8 py-3 rounded-xl font-bold uppercase text-xs">Đóng</button>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <button onclick="closeInvoice()" class="flex-1 sm:flex-none bg-slate-900 hover:bg-black text-white px-8 py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider transition">Đóng lại</button>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <script>
-        const PRICES = { uniform: 120000, sock: 25000, shoe: 220000 };
-        let currentTotal = 0;
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-white pt-16 pb-12 no-print border-t border-slate-900">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-xl overflow-hidden p-0.5 flex items-center justify-center">
+                            <img src="image_3ebd48.png" alt="Logo Nam Sơn" class="h-full w-full object-contain" onerror="loadFallbackLogo(this, 'NS', '#002d72')">
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black block leading-none text-red-500">HỌC VIỆN BÓNG ĐÁ</span>
+                            <span class="text-lg font-black block leading-none">NAM SƠN</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-md">
+                        Học viện bóng đá cộng đồng hàng đầu, bồi dưỡng thể chất toàn diện, đào tạo nền tảng và chiến thuật nâng cao cho lứa tuổi mầm non và học đường. Đồng hành cùng hệ thống đào tạo trẻ chuyên nghiệp.
+                    </p>
+                </div>
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-widest text-yellow-400 mb-6">Liên kết nhanh</h4>
+                    <ul class="space-y-3 text-xs text-slate-400 font-medium">
+                        <li><span onclick="scrollToSection('home')" class="hover:text-white cursor-pointer transition">Trang Chủ</span></li>
+                        <li><span onclick="scrollToSection('features')" class="hover:text-white cursor-pointer transition">Vì Sao Chọn Học Viện</span></li>
+                        <li><span onclick="scrollToSection('schedule-section')" class="hover:text-white cursor-pointer transition">Lịch Tập Các Cơ Sở</span></li>
+                        <li><span onclick="scrollToSection('pricing')" class="hover:text-white cursor-pointer transition">Bảng Giá Học Phí</span></li>
+                    </ul>
+                </div>
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-widest text-yellow-400 mb-6">Thông tin hỗ trợ</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        Hỗ trợ chăm sóc học viên trực tuyến 24/7. Phụ huynh liên hệ Zalo hoặc Gọi trực tiếp theo Hotline tuyển sinh để nhận tư vấn xếp lớp kịp thời.
+                    </p>
+                    <a href="tel:0869426975" class="text-red-500 font-extrabold text-sm"><i class="fa-solid fa-phone mr-2"></i> 0869.426.975</a>
+                </div>
+            </div>
 
+            <!-- Copyright and Strategic alignment -->
+            <div class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Học Viện Bóng Đá Nam Sơn. All rights reserved.</p>
+                <p class="uppercase tracking-widest font-black text-[10px]">Đào tạo nền tảng - Chuyên nghiệp bền vững</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Standard Price Constants
+        const PRICES = { uniform: 120000, sock: 25000, shoe: 220000, summerSessionRate: 82000 };
+        let currentTotal = 0;
+        let calculatedSummerSessions = 0;
+
+        // Fallback Logos helper
+        function loadFallbackLogo(imgElement, textCode, colorHex) {
+            imgElement.style.display = 'none';
+            const parent = imgElement.parentElement;
+            if (parent) {
+                parent.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center font-black text-white text-base rounded-lg shadow-sm" style="background-color: ${colorHex}">
+                        ${textCode}
+                    </div>
+                `;
+            }
+        }
+
+        // Custom Safe Toast notifications (replaces dangerous alert() per CSP rules)
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `flex items-center gap-3 px-5 py-4 rounded-2xl shadow-xl border text-sm font-bold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto max-w-sm bg-white ${
+                type === 'error' 
+                ? 'border-red-200 text-red-600 shadow-red-100' 
+                : 'border-emerald-200 text-emerald-600 shadow-emerald-100'
+            }`;
+            
+            const icon = type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-check';
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-lg"></i>
+                <div class="flex-1">${message}</div>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Animation trigger
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            // Auto dismiss
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        // Custom switch tab mechanism for Schedules
+        function switchScheduleTab(tabId) {
+            const cs1Content = document.getElementById('tab-cs1-content');
+            const cs2Content = document.getElementById('tab-cs2-content');
+            const btnCs1 = document.getElementById('btn-tab-cs1');
+            const btnCs2 = document.getElementById('btn-tab-cs2');
+
+            if (tabId === 'tab-cs1') {
+                cs1Content.classList.remove('hidden');
+                cs2Content.classList.add('hidden');
+                
+                btnCs1.className = "px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 bg-white text-red-600 shadow-sm";
+                btnCs2.className = "px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 text-slate-500 hover:text-slate-800";
+            } else {
+                cs1Content.classList.add('hidden');
+                cs2Content.classList.remove('hidden');
+                
+                btnCs1.className = "px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 text-slate-500 hover:text-slate-800";
+                btnCs2.className = "px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all duration-300 bg-white text-blue-900 shadow-sm";
+            }
+        }
+
+        // Standard Scroll mechanism
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-2xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-2xl';
+            }
+        }
+
+        // Equipment Quantity change handler
         function updateQty(id, delta) {
             const input = document.getElementById(id);
             let val = parseInt(input.value) + delta;
@@ -797,13 +1183,147 @@
             input.value = val;
             
             const cardId = 'card' + id.replace('qty', '');
-            if (val > 0) document.getElementById(cardId).classList.add('active');
-            else document.getElementById(cardId).classList.remove('active');
+            const card = document.getElementById(cardId);
+            
+            if (val > 0) {
+                card.classList.add('border-red-500', 'bg-red-50/20');
+            } else {
+                card.classList.remove('border-red-500', 'bg-red-50/20');
+            }
             
             calculateAll();
         }
 
+        function toggleProgramMode() {
+            const program = document.querySelector('input[name="courseProgram"]:checked').value;
+            const summerInputs = document.getElementById('summer-inputs-container');
+            const daysSelectionSection = document.getElementById('daysSelectionSection');
+            const locSelect = document.getElementById('locationSelect');
+            const pTypeRadios = document.getElementsByName('pType');
+            const p7Radio = document.getElementById('p7');
+            const p5Radio = document.getElementById('p5');
+            const noteInstr = document.getElementById('invoiceInstructionNotes');
+
+            if (program === 'summer') {
+                // LOCK to Summer Mode Rules
+                summerInputs.classList.remove('hidden');
+                daysSelectionSection.classList.add('hidden'); // We auto-manage days checking
+                
+                // Summer course is only at Phú Thọ (cs2)
+                locSelect.value = 'cs2';
+                locSelect.disabled = true; 
+                document.getElementById('labelLocationSelect').innerText = "Cơ sở tập luyện (Khóa hè cố định)";
+
+                // Summer course is Sân 5 (locks selection)
+                p5Radio.checked = true;
+                p7Radio.disabled = true;
+                document.getElementById('labelPType').innerText = "Loại hình sân tập (Khóa hè cố định)";
+                
+                // Initialize Summer default dates
+                const today = new Date();
+                let year = today.getFullYear();
+                let month = String(today.getMonth() + 1).padStart(2, '0');
+                let day = String(today.getDate()).padStart(2, '0');
+                const startStr = `${year}-${month}-${day}`;
+                
+                // Set default/min attributes for date picker based on 2026 limits
+                const picker = document.getElementById('summerStartDate');
+                picker.min = "2026-06-05"; // Current limit
+                if (today > new Date('2026-06-05')) {
+                    picker.value = startStr;
+                } else {
+                    picker.value = "2026-06-05";
+                }
+
+                noteInstr.innerHTML = `Khóa hè được tính học phí trọn gói theo số buổi học thực tế từ ngày bắt đầu đến ngày kết thúc của lớp hè (**82.000đ/buổi**).`;
+                onSummerPatternChange();
+            } else {
+                // RESTORE to Regular Mode Rules
+                summerInputs.classList.add('hidden');
+                daysSelectionSection.classList.remove('hidden');
+                
+                locSelect.disabled = false;
+                p7Radio.disabled = false;
+                document.getElementById('labelLocationSelect').innerText = "Lựa chọn Cơ sở tập";
+                document.getElementById('labelPType').innerText = "Loại hình sân tập";
+
+                noteInstr.innerHTML = `Khóa đóng tối thiểu 2 tháng đã được nhân đôi trực tiếp. Đồng phục học viện là bắt buộc đối với tất cả học viên mới.`;
+                updateLogic();
+            }
+        }
+
+        function onSummerPatternChange() {
+            const pattern = document.getElementById('summerClassPattern').value;
+            const picker = document.getElementById('summerStartDate');
+            
+            // Set max bounds on picker according to respective end date
+            if (pattern === 't246') {
+                picker.max = "2026-08-14";
+            } else {
+                picker.max = "2026-08-13";
+            }
+            
+            // Ensure checked days display in logic updates correctly
+            const allDays = ['t2', 't3', 't4', 't5', 't6', 't7', 'cn'];
+            allDays.forEach(d => {
+                const el = document.getElementById(d);
+                el.checked = false;
+                el.disabled = true;
+            });
+
+            if (pattern === 't246') {
+                document.getElementById('t2').checked = true;
+                document.getElementById('t4').checked = true;
+                document.getElementById('t6').checked = true;
+            } else {
+                document.getElementById('t3').checked = true;
+                document.getElementById('t5').checked = true;
+            }
+
+            // Fixed timeslot for summer classes
+            const timeSelect = document.getElementById('timeSlot');
+            timeSelect.innerHTML = `<option value="07:30 - 09:30 (Khóa Hè)" selected>Sáng: 07:30 - 09:30 (Khóa Hè)</option>`;
+
+            calculateAll();
+        }
+
+        function calculateSummerSessionCount(startDateStr, pattern) {
+            if (!startDateStr) return 0;
+            const start = new Date(startDateStr);
+            let end;
+            let activeDays = []; // JS day indices: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+            
+            if (pattern === 't246') {
+                end = new Date(2026, 7, 14); // 14 Aug 2026 (Month is 0-indexed, so 7 is August)
+                activeDays = [1, 3, 5]; // Mon, Wed, Fri
+            } else if (pattern === 't35') {
+                end = new Date(2026, 7, 13); // 13 Aug 2026
+                activeDays = [2, 4]; // Tue, Thu
+            } else {
+                return 0;
+            }
+
+            if (start > end) return 0;
+
+            let count = 0;
+            let current = new Date(start);
+            while (current <= end) {
+                if (activeDays.includes(current.getDay())) {
+                    count++;
+                }
+                current.setDate(current.getDate() + 1);
+            }
+            return count;
+        }
+
         function updateLogic() {
+            // Check if we are in Summer mode
+            const program = document.querySelector('input[name="courseProgram"]:checked').value;
+            if (program === 'summer') {
+                onSummerPatternChange();
+                return;
+            }
+
             const loc = document.getElementById('locationSelect').value;
             const pType = document.querySelector('input[name="pType"]:checked').value;
             const timeSelect = document.getElementById('timeSlot');
@@ -811,81 +1331,92 @@
             const p7 = document.getElementById('p7');
             const p5 = document.getElementById('p5');
 
-            // Reset trạng thái ngày
+            // Reset Day selection status
             const allDays = ['t2', 't3', 't4', 't5', 't6', 't7', 'cn'];
-            allDays.forEach(d => document.getElementById(d).disabled = false);
+            allDays.forEach(d => {
+                const dayInput = document.getElementById(d);
+                dayInput.disabled = false;
+            });
             p7.disabled = false;
+            note.classList.add('hidden');
             note.innerText = "";
 
-            let timeOptions = `<option value="">Chọn khung giờ *</option>`;
+            let timeOptions = `<option value="">-- Chọn Khung Giờ Tập Luyện Của Bé --</option>`;
             let selectedDays = [];
             document.querySelectorAll('.day-check:checked').forEach(d => selectedDays.push(d.value));
 
             if (loc === 'cs1') {
-                // LOGIC BẮC HẢI
+                // CAMPUS 1 (BẮC HẢI) LOGIC: Only T3, T5, T7, CN. No Sân 7, Only Sân 5.
                 const restricted = ['t2', 't4', 't6'];
                 restricted.forEach(d => {
                     const el = document.getElementById(d);
                     el.checked = false;
                     el.disabled = true;
                 });
-                p7.disabled = true;
-                if (pType === "7") p5.checked = true;
                 
-                timeOptions += `<option value="17:00 - 19:00">Duy nhất: 17:00 - 19:00</option>`;
-                note.innerText = "* Bắc Hải: Tập T3-5-7-CN | Khung giờ 17:00-19:00";
+                // Disable Sân 7 at Bắc Hải
+                p7.disabled = true;
+                if (pType === "7") {
+                    p5.checked = true;
+                    showToast("Cơ sở Bắc Hải hiện tại chưa tổ chức lớp Sân 7!", "error");
+                }
+                
+                timeOptions += `<option value="17:00 - 19:00" selected>Duy nhất: 17:00 - 19:00</option>`;
+                note.innerHTML = `<i class="fa-solid fa-circle-info mr-1.5"></i> Cơ sở Bắc Hải chỉ tập T3-T5-T7-CN từ 17:00 đến 19:00 (chỉ có Sân 5).`;
+                note.classList.remove('hidden');
             } else {
-                // LOGIC PHÚ THỌ
-                // 1. Loại bỏ Thứ 6 hoàn toàn
+                // CAMPUS 2 (PHÚ THỌ) LOGIC
+                // Completely exclude Thứ 6 (Friday) for regular program
                 const t6 = document.getElementById('t6');
                 t6.checked = false;
                 t6.disabled = true;
 
                 if (pType === "7") {
-                    // Sân 7 chỉ T7 CN và khung giờ duy nhất
+                    // Sân 7 Phú Thọ only works on Weekend (T7 & CN)
                     const restricted = ['t2', 't3', 't4', 't5'];
                     restricted.forEach(d => {
                         const el = document.getElementById(d);
                         el.checked = false;
                         el.disabled = true;
                     });
-                    timeOptions += `<option value="17:30 - 19:00">Duy nhất: 17:30 - 19:00 (Sân 7)</option>`;
-                    note.innerText = "* Sân 7 Phú Thọ: Chỉ T7 & CN | 17:30 - 19:00";
+                    timeOptions += `<option value="17:30 - 19:00 (Sân 7)" selected>Duy nhất: 17:30 - 19:00 (Lớp Sân 7)</option>`;
+                    note.innerHTML = `<i class="fa-solid fa-circle-info mr-1.5"></i> Lớp Sân 7 Phú Thọ chỉ có khung giờ 17:30 - 19:00 Thứ Bảy & Chủ Nhật.`;
+                    note.classList.remove('hidden');
                 } else {
-                    // Sân 5 Phú Thọ - Logic khung giờ theo ngày
+                    // Sân 5 Phú Thọ Logic
                     const hasT24 = selectedDays.includes('T2') || selectedDays.includes('T4');
                     const hasT35 = selectedDays.includes('T3') || selectedDays.includes('T5');
                     const hasWeekend = selectedDays.includes('T7') || selectedDays.includes('CN');
 
                     if (hasT24) {
-                        timeOptions += `<option value="17:15 - 19:15 (Nhóm nhỏ)">17:15 - 19:15 (T2-T4 Nhóm nhỏ)</option>`;
+                        timeOptions += `<option value="17:15 - 19:15 (T2-T4 Nhóm nhỏ)">Thứ 2 - 4: 17:15 - 19:15 (Nhóm nhỏ)</option>`;
                     }
                     if (hasT35) {
-                        timeOptions += `<option value="17:15 - 19:15 (Nhóm lớn)">17:15 - 19:15 (T3-T5 Nhóm lớn)</option>`;
-                        timeOptions += `<option value="17:30 - 19:30">17:30 - 19:30 (T3-T5)</option>`;
+                        timeOptions += `<option value="17:15 - 19:15 (T3-T5 Nhóm lớn)">Thứ 3 - 5: 17:15 - 19:15 (Nhóm lớn)</option>`;
+                        timeOptions += `<option value="17:30 - 19:30 (T3-T5)">Thứ 3 - 5: 17:30 - 19:30</option>`;
                     }
                     if (hasWeekend) {
-                        timeOptions += `<option value="07:30 - 09:30">07:30 - 09:30 (Sáng)</option>`;
-                        timeOptions += `<option value="15:00 - 17:00">15:00 - 17:00 (Chiều)</option>`;
-                        timeOptions += `<option value="17:00 - 19:00 (Nhóm nhỏ)">17:00 - 19:00 (Nhóm nhỏ)</option>`;
-                        timeOptions += `<option value="17:30 - 19:30 (Nhóm lớn)">17:30 - 19:30 (Nhóm lớn)</option>`;
+                        timeOptions += `<option value="07:30 - 09:30 (Cuối tuần Sáng)">Thứ 7 - CN: 07:30 - 09:30 (Sáng)</option>`;
+                        timeOptions += `<option value="15:00 - 17:00 (Cuối tuần Chiều)">Thứ 7 - CN: 15:00 - 17:00 (Chiều)</option>`;
+                        timeOptions += `<option value="17:00 - 19:00 (Cuối tuần Nhóm nhỏ)">Thứ 7 - CN: 17:00 - 19:00 (Nhóm nhỏ)</option>`;
+                        timeOptions += `<option value="17:30 - 19:30 (Cuối tuần Nhóm lớn)">Thứ 7 - CN: 17:30 - 19:30 (Nhóm lớn)</option>`;
                     }
 
-                    // Nếu chưa chọn ngày nào, hiển thị danh sách tham khảo
+                    // Fallback reference list if no day has been selected
                     if (selectedDays.length === 0) {
                         timeOptions += `
-                            <optgroup label="Thứ 2 - Thứ 4">
-                                <option value="17:15 - 19:15 (Nhóm nhỏ)">17:15 - 19:15 (Nhóm nhỏ)</option>
+                            <optgroup label="Thứ 2 - Thứ 4 (Tham khảo)">
+                                <option value="17:15 - 19:15 (T2-T4 Nhóm nhỏ)">17:15 - 19:15 (Nhóm nhỏ)</option>
                             </optgroup>
-                            <optgroup label="Thứ 3 - Thứ 5">
-                                <option value="17:15 - 19:15 (Nhóm lớn)">17:15 - 19:15 (Nhóm lớn)</option>
-                                <option value="17:30 - 19:30">17:30 - 19:30</option>
+                            <optgroup label="Thứ 3 - Thứ 5 (Tham khảo)">
+                                <option value="17:15 - 19:15 (T3-T5 Nhóm lớn)">17:15 - 19:15 (Nhóm lớn)</option>
+                                <option value="17:30 - 19:30 (T3-T5)">17:30 - 19:30</option>
                             </optgroup>
-                            <optgroup label="Thứ 7 - CN">
-                                <option value="07:30 - 09:30">07:30 - 09:30</option>
-                                <option value="15:00 - 17:00">15:00 - 17:00</option>
-                                <option value="17:00 - 19:00 (Nhóm nhỏ)">17:00 - 19:00 (Nhóm nhỏ)</option>
-                                <option value="17:30 - 19:30 (Nhóm lớn)">17:30 - 19:30 (Nhóm lớn)</option>
+                            <optgroup label="Thứ 7 - Chủ Nhật (Tham khảo)">
+                                <option value="07:30 - 09:30 (Sáng)">Sáng: 07:30 - 09:30</option>
+                                <option value="15:00 - 17:00 (Chiều)">Chiều: 15:00 - 17:00</option>
+                                <option value="17:00 - 19:00 (Nhóm nhỏ)">Chiều tối: 17:00 - 19:00 (Nhỏ)</option>
+                                <option value="17:30 - 19:30 (Nhóm lớn)">Chiều tối: 17:30 - 19:30 (Lớn)</option>
                             </optgroup>`;
                     }
                 }
@@ -895,26 +1426,48 @@
             calculateAll();
         }
 
+        // Comprehensive Real-time fee calculator
         function calculateAll() {
+            const program = document.querySelector('input[name="courseProgram"]:checked').value;
             const pType = document.querySelector('input[name="pType"]:checked').value;
-            let dayCount = 0;
-            document.querySelectorAll('.day-check:checked').forEach(() => dayCount++);
+            
+            let tuitionTotal = 0;
+            let className = "";
+            
+            if (program === 'summer') {
+                // SUMMER CALCULATION MODE
+                const pattern = document.getElementById('summerClassPattern').value;
+                const startDateStr = document.getElementById('summerStartDate').value;
+                calculatedSummerSessions = calculateSummerSessionCount(startDateStr, pattern);
+                
+                // Update sessions text
+                document.getElementById('summerSessionsCount').innerText = `Số buổi: ${calculatedSummerSessions}`;
+                
+                tuitionTotal = calculatedSummerSessions * PRICES.summerSessionRate;
+                const patternLabel = pattern === 't246' ? "T2-T4-T6" : "T3-T5";
+                className = `Khóa Hè Đặc Biệt (${patternLabel} | ${calculatedSummerSessions} buổi)`;
+            } else {
+                // REGULAR CALCULATION MODE
+                let dayCount = 0;
+                document.querySelectorAll('.day-check:checked').forEach(() => dayCount++);
 
-            let monthlyFee = 0;
-            let name = "";
+                let monthlyFee = 0;
+                if (dayCount === 1) {
+                    monthlyFee = (pType === "5") ? 400000 : 520000;
+                    className = `Khóa Sân ${pType} Tiêu chuẩn (1 buổi/tuần)`;
+                } else if (dayCount === 2) {
+                    monthlyFee = (pType === "5") ? 650000 : 850000;
+                    className = `Khóa Sân ${pType} Nâng cao (2 buổi/tuần)`;
+                } else if (dayCount >= 3) {
+                    monthlyFee = 1500000; // Năng khiếu
+                    className = "Khóa Đào tạo Năng khiếu Đặc biệt (3+ buổi/tuần)";
+                }
 
-            if (dayCount === 1) {
-                monthlyFee = (pType === "5") ? 400000 : 520000;
-                name = `Sân ${pType} (1 buổi/tuần)`;
-            } else if (dayCount === 2) {
-                monthlyFee = (pType === "5") ? 650000 : 850000;
-                name = `Sân ${pType} (2 buổi/tuần)`;
-            } else if (dayCount >= 3) {
-                monthlyFee = 1500000;
-                name = "Khóa Năng Khiếu (3+ buổi/tuần)";
+                // Enrollment tuition represents 2 months minimum
+                tuitionTotal = monthlyFee * 2;
             }
-
-            const tuitionTotal = monthlyFee * 2;
+            
+            // Equipment calculation
             const qU = parseInt(document.getElementById('qtyUniform').value);
             const qSo = parseInt(document.getElementById('qtySock').value);
             const qSh = parseInt(document.getElementById('qtyShoe').value);
@@ -923,67 +1476,233 @@
             const subSo = qSo * PRICES.sock;
             const subSh = qSh * PRICES.shoe;
 
-            document.getElementById('subUniform').innerText = (subU / 1000) + 'k';
-            document.getElementById('subSock').innerText = (subSo / 1000) + 'k';
-            document.getElementById('subShoe').innerText = (subSh / 1000) + 'k';
+            document.getElementById('subUniform').innerText = subU > 0 ? (subU / 1000) + 'k' : '0đ';
+            document.getElementById('subSock').innerText = subSo > 0 ? (subSo / 1000) + 'k' : '0đ';
+            document.getElementById('subShoe').innerText = subSh > 0 ? (subSh / 1000) + 'k' : '0đ';
 
             const equipTotal = subU + subSo + subSh;
             currentTotal = tuitionTotal + equipTotal;
 
-            document.getElementById('totalAmount').innerText = currentTotal.toLocaleString('vi-VN') + "đ";
-            
-            if (monthlyFee > 0) {
-                document.getElementById('calc-detail').innerHTML = 
-                    `${name}: ${tuitionTotal.toLocaleString()}đ (2 tháng)` + 
-                    (equipTotal > 0 ? ` + Trang bị: ${equipTotal.toLocaleString()}đ` : '');
+            // Update DOM Total text
+            const displayTotal = currentTotal.toLocaleString('vi-VN') + "đ";
+            document.getElementById('totalAmount').innerText = displayTotal;
+            document.getElementById('invTotal').innerText = displayTotal;
+
+            // Live Breakdown Display
+            const previewItemsList = document.getElementById('bill-items-list');
+            const previewCalcDetail = document.getElementById('preview-calc-detail');
+
+            if (tuitionTotal > 0 || program === 'summer') {
+                if (program === 'summer') {
+                    const startLabel = document.getElementById('summerStartDate').value ? new Date(document.getElementById('summerStartDate').value).toLocaleDateString('vi-VN') : '--';
+                    const pattern = document.getElementById('summerClassPattern').value;
+                    const endLabel = pattern === 't246' ? '14/08/2026' : '13/08/2026';
+                    previewCalcDetail.innerHTML = `Khóa hè: ${startLabel} đến ${endLabel} (${calculatedSummerSessions} buổi)`;
+                } else {
+                    previewCalcDetail.innerHTML = `Tính từ: Lớp học 2 tháng + trang bị phụ kiện`;
+                }
+                
+                let billHtml = `
+                    <div class="flex justify-between items-center text-slate-200">
+                        <div>
+                            <p class="font-bold text-white">${className}</p>
+                            <p class="text-[11px] text-slate-400">
+                                ${program === 'summer' ? `Học phí tính theo số buổi (82.000đ/buổi)` : `Thời gian đóng tối thiểu 1 khóa: 2 tháng`}
+                            </p>
+                        </div>
+                        <span class="font-bold text-yellow-400">${tuitionTotal.toLocaleString('vi-VN')}đ</span>
+                    </div>
+                `;
+
+                if (qU > 0) {
+                    const selectedSize = document.getElementById('sizeUniform').value || 'Chưa chọn';
+                    billHtml += `
+                        <div class="flex justify-between items-center text-slate-300 mt-2">
+                            <span>Đồng phục học viện (x${qU}) - Size: ${selectedSize}</span>
+                            <span>${subU.toLocaleString('vi-VN')}đ</span>
+                        </div>
+                    `;
+                }
+                if (qSo > 0) {
+                    billHtml += `
+                        <div class="flex justify-between items-center text-slate-300 mt-1">
+                            <span>Tất vớ dài cao cấp (x${qSo})</span>
+                            <span>${subSo.toLocaleString('vi-VN')}đ</span>
+                        </div>
+                    `;
+                }
+                if (qSh > 0) {
+                    const selectedShoeSize = document.getElementById('sizeShoe').value || 'Chưa chọn';
+                    billHtml += `
+                        <div class="flex justify-between items-center text-slate-300 mt-1">
+                            <span>Giày đá bóng cao cấp (x${qSh}) - Size: ${selectedShoeSize}</span>
+                            <span>${subSh.toLocaleString('vi-VN')}đ</span>
+                        </div>
+                    `;
+                }
+
+                previewItemsList.innerHTML = billHtml;
             } else {
-                document.getElementById('calc-detail').innerText = "Vui lòng chọn ngày tập luyện...";
+                previewCalcDetail.innerText = "Chưa đầy đủ thông tin";
+                previewItemsList.innerHTML = `<p class="text-slate-500 italic text-center py-6 text-xs">Vui lòng hoàn tất biểu mẫu đăng ký bên cạnh để hiển thị tạm tính chi phí...</p>`;
             }
         }
 
         document.getElementById('footballForm').onsubmit = (e) => {
             e.preventDefault();
-            if (currentTotal === 0) { alert("Vui lòng chọn ngày tập luyện!"); return; }
-            if (!document.getElementById('timeSlot').value) { alert("Vui lòng chọn khung giờ cụ thể!"); return; }
+            const program = document.querySelector('input[name="courseProgram"]:checked').value;
             
-            // Thông tin hóa đơn
+            // Custom Input validations
+            if (currentTotal === 0) { 
+                showToast("Vui lòng thiết lập ngày hoặc lớp tập luyện chi tiết cho bé!", "error"); 
+                return; 
+            }
+            if (!document.getElementById('timeSlot').value) { 
+                showToast("Vui lòng chọn khung giờ cụ thể mong muốn!", "error"); 
+                return; 
+            }
+            if (program === 'summer' && calculatedSummerSessions === 0) {
+                showToast("Vui lòng kiểm tra lại ngày bắt đầu học khóa hè!", "error");
+                return;
+            }
+
+            // Validate Uniform Size selected if quantity > 0
+            const qU = parseInt(document.getElementById('qtyUniform').value);
+            if (qU > 0 && !document.getElementById('sizeUniform').value) {
+                showToast("Vui lòng chọn Size Đồng Phục cho bé!", "error");
+                document.getElementById('sizeUniform').focus();
+                return;
+            }
+
+            // Validate Shoe Size selected if quantity > 0
+            const qSh = parseInt(document.getElementById('qtyShoe').value);
+            if (qSh > 0 && !document.getElementById('sizeShoe').value) {
+                showToast("Vui lòng chọn Size Giày cho bé!", "error");
+                document.getElementById('sizeShoe').focus();
+                return;
+            }
+            
+            // Map inputs to Printable Invoice
             document.getElementById('invParent').innerText = document.getElementById('parentName').value;
-            document.getElementById('invPhone').innerText = "SĐT: " + document.getElementById('phoneNumber').value;
+            document.getElementById('invPhone').innerText = "SĐT Zalo: " + document.getElementById('phoneNumber').value;
             document.getElementById('invStudent').innerText = document.getElementById('studentName').value;
             document.getElementById('invBirth').innerText = "Năm sinh: " + document.getElementById('birthYear').value;
             document.getElementById('invDate').innerText = "Ngày lập: " + new Date().toLocaleDateString('vi-VN');
-            document.getElementById('invId').innerText = Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('invTotal').innerText = currentTotal.toLocaleString('vi-VN') + "đ";
+            document.getElementById('invId').innerText = "#NS" + Math.floor(1000 + Math.random() * 9000);
 
+            // Construct list items details inside modal
             let detailHtml = "";
             const loc = document.getElementById('locationSelect').options[document.getElementById('locationSelect').selectedIndex].text;
             const pType = document.querySelector('input[name="pType"]:checked').value;
             const timeslot = document.getElementById('timeSlot').value;
+            
             let days = [];
             document.querySelectorAll('.day-check:checked').forEach(d => days.push(d.value));
 
-            const equipVal = (parseInt(document.getElementById('qtyUniform').value)*PRICES.uniform + parseInt(document.getElementById('qtySock').value)*PRICES.sock + parseInt(document.getElementById('qtyShoe').value)*PRICES.shoe);
+            const qSo = parseInt(document.getElementById('qtySock').value);
+            const equipVal = (qU * PRICES.uniform + qSo * PRICES.sock + qSh * PRICES.shoe);
             const tuitionVal = currentTotal - equipVal;
 
-            detailHtml += `<div class="flex justify-between font-bold border-b pb-1 mb-2 uppercase text-[10px] text-gray-500"><span>Mục đăng ký</span><span>Học phí</span></div>`;
-            detailHtml += `<div class="flex justify-between"><span>Học phí Sân ${pType} (2 tháng) <br><small class="text-gray-400 font-bold uppercase">${loc} | ${days.join(', ')} | ${timeslot}</small></span><span class="font-bold">${tuitionVal.toLocaleString()}đ</span></div>`;
+            detailHtml += `
+                <div class="flex justify-between font-black border-b pb-2 uppercase text-xs text-slate-400 tracking-wider">
+                    <span>Nội dung học tập / Trang bị</span>
+                    <span>Học phí tạm tính</span>
+                </div>
+            `;
             
-            const qU = parseInt(document.getElementById('qtyUniform').value);
-            const qSo = parseInt(document.getElementById('qtySock').value);
-            const qSh = parseInt(document.getElementById('qtyShoe').value);
+            if (program === 'summer') {
+                const pattern = document.getElementById('summerClassPattern').value;
+                const startDateStr = document.getElementById('summerStartDate').value;
+                const formattedStart = startDateStr ? new Date(startDateStr).toLocaleDateString('vi-VN') : '--';
+                const formattedEnd = pattern === 't246' ? '14/08/2026' : '13/08/2026';
+                
+                detailHtml += `
+                    <div class="flex justify-between items-start text-sm border-b pb-3 pt-3">
+                        <div>
+                            <p class="font-extrabold text-orange-600">Khóa Học HÈ Rèn Luyện Đặc Biệt 2026</p>
+                            <p class="text-xs text-slate-500 mt-1 uppercase font-bold"><i class="fa-solid fa-map-location mr-1"></i> Cơ sở 2: Sân Phú Thọ</p>
+                            <p class="text-xs text-slate-500 mt-0.5 font-semibold">
+                                <i class="fa-solid fa-calendar-check mr-1"></i> ${days.join(', ')} | Khung giờ: ${timeslot}
+                            </p>
+                            <p class="text-xs text-slate-400 mt-0.5 italic">
+                                Học từ ngày ${formattedStart} đến ${formattedEnd} (Số buổi học: ${calculatedSummerSessions} buổi x 82k)
+                            </p>
+                        </div>
+                        <span class="font-bold text-slate-900">${tuitionVal.toLocaleString()}đ</span>
+                    </div>
+                `;
+            } else {
+                detailHtml += `
+                    <div class="flex justify-between items-start text-sm border-b pb-3 pt-3">
+                        <div>
+                            <p class="font-extrabold text-slate-800">Học phí đào tạo Sân ${pType} (Khóa 2 tháng)</p>
+                            <p class="text-xs text-slate-400 mt-1 uppercase font-bold"><i class="fa-solid fa-map-location mr-1"></i> ${loc}</p>
+                            <p class="text-xs text-slate-400 mt-0.5 font-semibold"><i class="fa-solid fa-calendar-check mr-1"></i> ${days.join(', ')} | Khung giờ: ${timeslot}</p>
+                        </div>
+                        <span class="font-bold text-slate-900">${tuitionVal.toLocaleString()}đ</span>
+                    </div>
+                `;
+            }
 
-            if (qU > 0) detailHtml += `<div class="flex justify-between mt-2"><span>Đồng phục học viên (x${qU}) - Size: ${document.getElementById('sizeUniform').value || 'N/A'}</span><span>${(qU * PRICES.uniform).toLocaleString()}đ</span></div>`;
-            if (qSo > 0) detailHtml += `<div class="flex justify-between mt-1"><span>Vớ đá bóng (x${qSo})</span><span>${(qSo * PRICES.sock).toLocaleString()}đ</span></div>`;
-            if (qSh > 0) detailHtml += `<div class="flex justify-between mt-1"><span>Giày đá bóng (x${qSh}) - Size: ${document.getElementById('sizeShoe').value || 'N/A'}</span><span>${(qSh * PRICES.shoe).toLocaleString()}đ</span></div>`;
+            if (qU > 0) {
+                detailHtml += `
+                    <div class="flex justify-between items-center text-sm border-b pb-3 pt-3 text-slate-700">
+                        <span>Đồng phục học viên (x${qU}) - Size: ${document.getElementById('sizeUniform').value}</span>
+                        <span class="font-semibold">${(qU * PRICES.uniform).toLocaleString()}đ</span>
+                    </div>
+                `;
+            }
+            if (qSo > 0) {
+                detailHtml += `
+                    <div class="flex justify-between items-center text-sm border-b pb-3 pt-3 text-slate-700">
+                        <span>Vớ bóng đá chuyên dụng dài (x${qSo})</span>
+                        <span class="font-semibold">${(qSo * PRICES.sock).toLocaleString()}đ</span>
+                    </div>
+                `;
+            }
+            if (qSh > 0) {
+                detailHtml += `
+                    <div class="flex justify-between items-center text-sm border-b pb-3 pt-3 text-slate-700">
+                        <span>Giày đá bóng cỏ nhân tạo (x${qSh}) - Size: ${document.getElementById('sizeShoe').value}</span>
+                        <span class="font-semibold">${(qSh * PRICES.shoe).toLocaleString()}đ</span>
+                    </div>
+                `;
+            }
 
             document.getElementById('invDetails').innerHTML = detailHtml;
-            document.getElementById('invoiceModal').style.display = 'block';
+            
+            // Show Modal Invoice with Flexbox representation
+            const modal = document.getElementById('invoiceModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            showToast("Hóa đơn ghi danh của bé đã xuất thành công!", "success");
         };
 
-        function closeInvoice() { document.getElementById('invoiceModal').style.display = 'none'; }
+        function closeInvoice() { 
+            const modal = document.getElementById('invoiceModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
         
-        // Khởi tạo logic ban đầu
-        updateLogic();
+        // Bootstrapping the logic execution
+        window.onload = function() {
+            // Set initial dates for calculation logic reference
+            const today = new Date();
+            let year = today.getFullYear();
+            let month = String(today.getMonth() + 1).padStart(2, '0');
+            let day = String(today.getDate()).padStart(2, '0');
+            const startStr = `${year}-${month}-${day}`;
+            
+            const picker = document.getElementById('summerStartDate');
+            picker.min = "2026-06-05";
+            if (today > new Date('2026-06-05')) {
+                picker.value = startStr;
+            } else {
+                picker.value = "2026-06-05";
+            }
+
+            updateLogic();
+        };
     </script>
 </body>
 </html>
